@@ -1703,6 +1703,20 @@ b {
 }
 
 
+.logo-title{
+    font-family: "Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    color:#000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 10px;
+}
+.logo-title span{
+    padding: 5px;
+    color: #86d4f5;
+    font-family: "Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+
 /** responsive hidden/show elements classes**/
 
 @media (min-width: 992px) {
