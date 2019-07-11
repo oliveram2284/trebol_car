@@ -25,10 +25,10 @@
                         <div class=' mt-60 mb-60  col-lg-6 col-md-6 col-sm-12 ml-auto mr-auto'>
                             <div class="bg-white shadow-sm overflow-hidden rounded">
                                 <div class="p-4 text-center bg-white text-dark">
-                                    <a href="index.html" class="">  
-                                    <img src="<?php echo base_url('assets/images/suoem_compra_logo_sm.png')?>" class="img-responsive" alt="FASTraM">
+                                    <a href="<?php  echo base_url();?>" class="">  
+                                    
                                     </a>
-                                    <h5 class='text-center h5 pt-10 mb-0 text-dark'>Bienvenido, Inicie Sesión!</h5>
+                                    <h4 class='text-center h4 pt-10 mb-0 text-dark'>GESTÍON RESERVAS</h4>
                                 </div>
                                 <div class="p-3 pt-30 pb-30">
 

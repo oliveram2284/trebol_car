@@ -29,7 +29,7 @@
             <aside id="page-aside" class=" page-aside ">
                 <div class="sidenav whiteNav">
                     <a href="<?php echo base_url('/')?>" class="app-logo d-flex flex flex-row align-items-center overflow-hidden justify-content-center logo-title">
-                        GESTION  <span>VEHÍCULO</span>
+                        GESTÍON  <span>RESERVAS</span>
                         <!-- <img src="<?php  echo base_url();?>assets/images/suoem_compra_logo_sm2.png" class="img-responsive" alt="SUOEM VALIDACION DE ORDENES DE COMPRAS">
 -->
                     </a>
