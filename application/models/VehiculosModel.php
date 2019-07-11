@@ -82,10 +82,40 @@ class VehiculosModel extends CI_Model {
             )
         ));
         $this->dbforge->create_table('vechiculo_tipos',true);
+
+
+        
+        $this->dbforge->add_field('id');
+        $this->dbforge->add_field(array(            
+            'vehiculo_id' => array(
+                'type' => 'INT',
+                'DEFAULT' =>0,
+            ),
+            'tarjeta_verde_venc' => array(
+                'type' => 'DATE',
+            ),
+            'seguro' => array(
+                'type' => 'TEXT',
+                'DEFAULT' =>''
+            ),
+            'seguro_venc' => array(
+                'type' => 'DATE',
+            ),   
+            'descripcion' => array(
+                'type' => 'TEXT',
+                'DEFAULT' =>NULL
+            ),            
+            'estado' => array(
+                'type' => 'INT',
+                'constraint' => 1,
+                'DEFAULT' =>1
+            )
+        ));
+        $this->dbforge->create_table('vechiculo_ficha_tecnica',true);
     }
 
     public function get_list(){
-        
+
         $result= $this->db->get('vehiculos');
         return $result->result_array();
     }
@@ -97,6 +127,17 @@ class VehiculosModel extends CI_Model {
         }
 
         $query = $this->db->get_where('vehiculos',array('id'=>$id));
+        $result = $query->row_array();
+        
+        return $result;
+    }
+
+    public function getFichaById($id=null){
+        if(!$id){
+            return false;
+        }
+
+        $query = $this->db->get_where('vechiculo_ficha_tecnica',array('id'=>$id));
         $result = $query->row_array();
         
         return $result;

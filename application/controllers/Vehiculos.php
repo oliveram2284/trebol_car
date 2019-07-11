@@ -132,8 +132,20 @@ class Vehiculos extends CI_Controller {
     }
 
     public function delete($id=0){
+
         $this->Vehiculos->delete($id);
         $this->session->set_flashdata('msg', 'Vehículo Elimnado');
         redirect('vehiculos');
+    }
+
+    public function ficha($id){
+        $permisos=$this->auth->permisos();	
+        $this->load->view('layout/header',array('permisos'=>$permisos));
+        $data=array();
+        $data['vehiculo'] = $this->Vehiculos->getById($id);
+        $data['ficha']    = $this->Vehiculos->getFichaById($id);
+        $data['action']   = "vehiculos/edit/".$id;
+        $this->load->view('vehiculos/ficha',$data);
+        $this->load->view('layout/footer');
     }
 }

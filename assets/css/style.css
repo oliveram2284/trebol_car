@@ -188,7 +188,11 @@ mark {
 }
 
 .pl-25 {
-    padding-left: 15px !important;
+    padding-left: 25px !important;
+}
+
+.pl-30 {
+    padding-left: 30px !important;
 }
 
 .pr-15 {
@@ -1714,6 +1718,12 @@ b {
     padding: 5px;
     color: #86d4f5;
     font-family: "Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+legend{
+    border-bottom: 1px solid red;
+    width: auto;
+    padding-right:20px;
 }
 
 
