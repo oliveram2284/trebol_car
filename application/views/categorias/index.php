@@ -59,8 +59,8 @@
                             <td class="text-center" ><?php echo $categoria['fecha_alta']?></td>
                             <td class="text-center" ><?php echo ($categoria['estado']==1)?'Habilitada':'Deshabilitado'?></td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-success"><i class="icon-Pencil"></i></a>
-                                <a href="#" class="btn btn-sm btn-danger"><i class="icon-Can"></i></a>
+                                <a href="<?php echo base_url('/categorias/edit/'.$categoria['id'])?>" class="btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Pencil"></i></a>
+                                <a href="<?php echo base_url('/categorias/delete/'.$categoria['id'])?>" class="btn btn-icon-o btn-sm btn-danger radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Can"></i></a>
                             </td>
                         </tr>
                     <?php endforeach;?>

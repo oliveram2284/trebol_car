@@ -49,23 +49,39 @@ class CategoriasModel extends CI_Model {
         return $result->result_array();
     }
 
+
+    public function getById($id=null){
+        if(!$id){
+            return false;
+        }
+
+        $query = $this->db->get_where('categorias',array('id'=>$id));
+        $result = $query->row_array();
+        
+        return $result;
+    }
+
     public function insert($data){
 
-        $this->nombre       = $data['title']; // please read the below note
-        $this->descripcion  = $data['content'];
+        $this->nombre       = $data['nombre']; // please read the below note
+        $this->descripcion  = (isset($data['descripcion']))?$data['descripcion']:'';
         $this->categoria_padre =0;
-        $this->fecha_alta   = time();
-        $this->estado       = 0 ;  
+        $this->fecha_alta   = date('Y-m-d H:i:s');;
+        $this->estado       = 1 ;  
 
         $this->db->insert('categorias', $this);
     }
 
     public function update($id,$data){
 
-        $this->title        = $data['title'];
-        $this->descripcion  = $data['content'];
-        $this->fecha_alta   = time();
+        $this->nombre       = $data['nombre']; // please read the below note
+        $this->descripcion  = (isset($data['descripcion']))?$data['descripcion']:'';
 
-        $this->db->update('categorias', $this, array('id' => $_id));
+        $this->db->update('categorias', $this, array('id' => $id));
+        
+    }
+
+    public function delete($id=false){
+        return $this->db->delete('categorias',array('id'=>$id));
     }
 }

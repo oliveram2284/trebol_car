@@ -6,11 +6,11 @@
                 <div class="list">
                     <div class="list-item pl-0">
                         <div class="list-thumb ml-0 mr-3 pr-3  b-r text-muted">
-                            <i class="icon-Car"></i>
+                            <i class="icon-c"></i>
                         </div>
                         <div class="list-body">
                             <div class="list-title fs-2x">
-                                <h2>Listado de Flota</h2>
+                                <h2>Vencimientos</h2>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                     <ol class="breadcrumb no-padding bg-trans mb-30">
                         <li class="breadcrumb-item"><a href="<?php echo base_url('/')?>"><i class="icon-Home mr-2 fs14"></i></a></li>
                         <li class="breadcrumb-item"><a href="<?php echo base_url('/')?>">Inicio</a></li>
-                        <li class="breadcrumb-item active">Vehículos</li>
+                        <li class="breadcrumb-item active">Vencimientos</li>
                     </ol>
                 </nav>
             </div>
@@ -31,9 +31,12 @@
 </div>
 <div class="page-content">
     <div class="container-fluid">
-        <a href="<?php echo base_url('vehiculos/add');?>" class="bt-add btn btn-dark float-lg-right mr-1 mb-2">
+        <!--<a href="<?php echo base_url('Asistencia/add');?>" class="bt-add btn btn-dark float-lg-right mr-1 mb-2">
             <i class="icon-Add-File"></i>Agregar
-        </a>        
+        </a>
+        <a href="<?php echo base_url('aporte/import');?>" class="bt-add btn btn-info float-lg-right mr-1 mb-2 invisible">
+            <i class="icon-upload"></i>Importar
+        </a>-->
         <div class="bg-white table-responsive rounded shadow-sm pt-3 ">
             <?php if($this->session->flashdata('msg')): ?>
                 <div class="alert alert-success" role="alert">
@@ -45,49 +48,23 @@
                 <thead>
                 <tr>
                     <th  class="text-center" >#</th>
-                    <th  class="text-center">Categoria</th>
-                    <th  class="text-center">Dominio</th>
-                    <th  class="text-center">Marca</th>
-                    <th  class="text-center">Modelo</th>
-                    <th  class="text-center">Tipo</th>
-                    <th  class="text-center">Año</th>
-                    <th  class="text-center">Fecha Agregado</th>
+                    <th  class="text-center">Adhrente</th>
+                    <th  class="text-center">Asistencia</th>
+                    <th  class="text-center">Monto</th>
+                    <th  class="text-center">Vencimiento</th>
                     <th  class="text-center">Estado</th>
                     <th class="text-center">-</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($vehiculos as $key=>$vehiculo):?>
-                        <tr>
-                            <td class="text-center" ><?php echo $key+1?></td>
-                            <td class="text-center" ><?php echo $vehiculo['categoria_id']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['dominio']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['marca']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['modelo']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['tipo']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['anio']?></td>
-                            <td class="text-center" ><?php echo $vehiculo['fecha_alta']?></td>
-                            <td class="text-center" ><?php echo ($vehiculo['estado']==1)?'Activo':'InACtivo'?></td>
-                            <td>
-                                <a href="<?php echo base_url('/vehiculos/edit/'.$vehiculo['id'])?>" class="btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Pencil"></i></a>
-                                <a href="<?php echo base_url('/vehiculos/delete/'.$vehiculo['id'])?>" class="btn btn-icon-o btn-sm btn-danger radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Can"></i></a>
-                                <a href="<?php echo base_url('/vehiculos/ficha/'.$vehiculo['id'])?>" class="btn btn-icon-o btn-sm btn-info  invisible radius100 btn-icon-sm mr-2 mb-2"><i class="icon-File"></i></a>
-                            </td>
-                        </tr>
-                    <?php endforeach;?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="10"></th>
-                    </tr>
-                </tfoot>
             </table>
 
     
         </div>
     </div>
 </div>
-
+<!--
 <input type="hidden" value="<?php echo base_url();?>" id="url">
 
 <div id="viewPayment" class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,6 +165,7 @@
     </div>
   </div>
 </div>
+-->
 
 
 
