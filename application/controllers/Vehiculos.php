@@ -15,6 +15,8 @@ class Vehiculos extends CI_Controller {
         $this->load->view('layout/header',array('permisos'=>$permisos));
         $data=array();
         $data['vehiculos'] = $this->Vehiculos->get_list();
+        $data['categorias'] = $this->Categorias->get_list();
+        var_dump($data);
 		$this->load->view('vehiculos/index',$data);
 		$this->load->view('layout/footer');
     }
@@ -139,13 +141,25 @@ class Vehiculos extends CI_Controller {
     }
 
     public function ficha($id){
+
         $permisos=$this->auth->permisos();	
         $this->load->view('layout/header',array('permisos'=>$permisos));
         $data=array();
+        $data['vehiculo_id'] = $id;
         $data['vehiculo'] = $this->Vehiculos->getById($id);
         $data['ficha']    = $this->Vehiculos->getFichaById($id);
-        $data['action']   = "vehiculos/edit/".$id;
+        $data['action']   = "vehiculos/ficha_save/".$id;
         $this->load->view('vehiculos/ficha',$data);
-        $this->load->view('layout/footer');
+        $data['scripts'][]='js_library/vehiculos/ficha.js';
+        $this->load->view('layout/footer',$data);
+       
+    }
+
+    public function ficha_save($id){
+        var_dump($id);
+        var_dump($this->input->post());
+        $result = $this->Vehiculos->ficha_add($id,$this->input->post()); 
+        $this->session->set_flashdata('msg', 'Se ha creado una nueva ficha Técnica');
+        redirect('vehiculos');
     }
 }

@@ -71,7 +71,7 @@
                             <td>
                                 <a href="<?php echo base_url('/vehiculos/edit/'.$vehiculo['id'])?>" class="btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Pencil"></i></a>
                                 <a href="<?php echo base_url('/vehiculos/delete/'.$vehiculo['id'])?>" class="btn btn-icon-o btn-sm btn-danger radius100 btn-icon-sm mr-2 mb-2"><i class="icon-Can"></i></a>
-                                <a href="<?php echo base_url('/vehiculos/ficha/'.$vehiculo['id'])?>" class="btn btn-icon-o btn-sm btn-info  invisible radius100 btn-icon-sm mr-2 mb-2"><i class="icon-File"></i></a>
+                                <a href="<?php echo base_url('/vehiculos/ficha/'.$vehiculo['id'])?>" class="btn btn-icon-o btn-sm btn-info radius100 btn-icon-sm mr-2 mb-2"><i class="icon-File"></i></a>
                             </td>
                         </tr>
                     <?php endforeach;?>
