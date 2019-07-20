@@ -60,7 +60,13 @@
                     <?php foreach($vehiculos as $key=>$vehiculo):?>
                         <tr>
                             <td class="text-center" ><?php echo $key+1?></td>
-                            <td class="text-center" ><?php echo $vehiculo['categoria_id']?></td>
+                            <td class="text-center" >
+                                <?php foreach ($categorias as $key => $value) {
+                                    if($vehiculo['categoria_id']==$value['id']){
+                                        echo $value['nombre'];
+                                    }
+                                }?>
+                            </td>
                             <td class="text-center" ><?php echo $vehiculo['dominio']?></td>
                             <td class="text-center" ><?php echo $vehiculo['marca']?></td>
                             <td class="text-center" ><?php echo $vehiculo['modelo']?></td>

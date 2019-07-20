@@ -16,7 +16,6 @@ class Vehiculos extends CI_Controller {
         $data=array();
         $data['vehiculos'] = $this->Vehiculos->get_list();
         $data['categorias'] = $this->Categorias->get_list();
-        var_dump($data);
 		$this->load->view('vehiculos/index',$data);
 		$this->load->view('layout/footer');
     }
