@@ -155,8 +155,6 @@ class Vehiculos extends CI_Controller {
     }
 
     public function ficha_save($id){
-        var_dump($id);
-        var_dump($this->input->post());
         $result = $this->Vehiculos->ficha_add($id,$this->input->post()); 
         $this->session->set_flashdata('msg', 'Se ha creado una nueva ficha Técnica');
         redirect('vehiculos');

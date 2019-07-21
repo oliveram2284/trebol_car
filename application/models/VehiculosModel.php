@@ -268,9 +268,10 @@ class VehiculosModel extends CI_Model {
             $result['otros']=array();
             return $result;
         }
-        $result['cambio_aceite_filtro'] = json_decode($result['cambio_aceite_filtro']);
-        $result['aline_balance_cambio'] = json_decode($result['aline_balance_cambio']);
-        $result['otros'] = json_decode($result['otros'],true);
+      // var_dump($result);
+        $result['cambio_aceite_filtro'] = ($result['cambio_aceite_filtro']!='null')?json_decode($result['cambio_aceite_filtro']):array();
+        $result['aline_balance_cambio'] = ($result['aline_balance_cambio']!='null')?json_decode($result['aline_balance_cambio']):array();
+        $result['otros'] = ($result['otros']!='')? json_decode($result['otros'],true):array();
 
         return $result;
     }
@@ -286,48 +287,60 @@ class VehiculosModel extends CI_Model {
         $params['seguro_venc']=$data['seguro_venc'];
         $params['cambio_aceite_fecha']=$data['cambio_aceite_fecha'];
         $params['cambio_aceite_km']=$data['cambio_aceite_km'];
-        $params['cambio_aceite_filtro']=json_encode($data['cambio_aceite_filtro'],true);
+        if(isset($data['cambio_aceite_filtro'])){
+            $params['cambio_aceite_filtro']=json_encode($data['cambio_aceite_filtro'],true);
+        }
         $params['cambio_aceite_observacion']=$data['cambio_aceite_observacion'];
         $params['aline_balance_fecha']=$data['aline_balance_fecha'];
         $params['aline_balance_km']=$data['aline_balance_km'];
-        $params['aline_balance_cambio']=json_encode($data['aline_balance_cambio'],true);
+
+        if(isset($data['aline_balance_cambio'])){
+            $params['aline_balance_cambio']=json_encode($data['aline_balance_cambio'],true);
+        }
         $params['aline_balance_observacion']=$data['aline_balance_observacion'];
         $params['nivel_agua_fecha']=$data['nivel_agua_fecha'];
         $params['nivel_agua_observacion']=$data['nivel_agua_observacion'];
-        $params['otros']=json_encode($data['otro_item'],    true);
-
-
-        if(isset($data['id'])){
+        if(isset($data['otro_item'])){
+            $params['otros']=json_encode($data['otro_item'],    true);
+        }
+        
+       
+      
+        if(isset($data['id']) && $data['id']!=''){
+           
             $this->db->select('*');
-            $this->db->where(array('f.vehiculo_id'=>$data['id']));
+            $this->db->where(array('f.id'=>$data['id']));
             $query = $this->db->get('vechiculo_ficha_tecnica as f');
+           
             $result = $query->row_array();
             $distinct=false;
-            foreach ($result as $key => $value) {                
-                if(array_key_exists($key,$data)){
-                    if($data[$key]!=$value){
-                        $distinct=true;
-                        break;
+            if(!empty($result)){
+                foreach ($result as $key => $value) {                
+                    if(array_key_exists($key,$data)){
+                        if($data[$key]!=$value){
+                            $distinct=true;
+                            break;
+                        }
                     }
                 }
+                if($distinct){
+                    $ficha_data=json_encode($result,true);
+                    $this->db->insert('vechiculo_ficha_tecnica_log',array('ficha_id'=>$data['id'],'ficha_data'=>$ficha_data,'creada'=>date('Y-m-d H:i:s')));
+                }         
+                
+                
             }
-            if($distinct){
-                $ficha_data=json_encode($result,true);
-                $this->db->insert('vechiculo_ficha_tecnica_log',array('ficha_id'=>$data['id'],'ficha_data'=>$ficha_data,'creada'=>date('Y-m-d H:i:s')));
-            }         
             
-            $this->db->update('vechiculo_ficha_tecnica', $params);
+            $this->db->update('vechiculo_ficha_tecnica', $params, array('id' => $data['id']));
         }else{
 
 
             $paras['estado']=1;
             $params['creada']=date('Y-m-d H:i:s');   
-          
-            $this->db->update('vechiculo_ficha_tecnica', $paras, array('id' => $data['id']));
+            
+            $this->db->insert('vechiculo_ficha_tecnica', $params);
         }
       
-        
-       
         return true;
 
     }

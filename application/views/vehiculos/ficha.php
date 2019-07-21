@@ -96,7 +96,7 @@
                             <div class="col-sm-2 ">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
 
-                                    <input type="checkbox" id="cambio_filtro_aceite" name="cambio_aceite_filtro[]" value="aceite" <?php echo (in_array('aceite',$ficha['cambio_aceite_filtro']))?'checked':'';?>  >
+                                    <input type="checkbox" id="cambio_filtro_aceite" name="cambio_aceite_filtro[]" value="aceite" <?php echo (isset($ficha['cambio_aceite_filtro']) && in_array('aceite',$ficha['cambio_aceite_filtro']))?'checked':'';?>  >
                                     <label for="cambio_filtro_aceite" class="mb-0">
                                         <span class="label-checkbox"></span>
                                         <span class="label-helper">Filtro Aceite</span>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
-                                    <input type="checkbox" id="cambio_filtro_aire" name="cambio_aceite_filtro[]" value="aire" <?php echo (in_array('aire',$ficha['cambio_aceite_filtro']))?'checked':'';?>>
+                                    <input type="checkbox" id="cambio_filtro_aire" name="cambio_aceite_filtro[]" value="aire" <?php echo (isset($ficha['cambio_aceite_filtro']) && in_array('aire',$ficha['cambio_aceite_filtro']))?'checked':'';?>>
                                     <label for="cambio_filtro_aire" class="mb-0">
                                         <span class="label-checkbox"></span>  
                                         <span class="label-helper">Filtro Aire</span>                                      
@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
-                                    <input type="checkbox" id="cambio_filtro_combustible"  name="cambio_aceite_filtro[]" value="combustible" <?php echo (in_array('combustible',$ficha['cambio_aceite_filtro']))?'checked':'';?>>
+                                    <input type="checkbox" id="cambio_filtro_combustible"  name="cambio_aceite_filtro[]" value="combustible" <?php echo (isset($ficha['cambio_aceite_filtro']) &&  in_array('combustible',$ficha['cambio_aceite_filtro']))?'checked':'';?>>
                                     <label for="cambio_filtro_combustible" class="mb-0">
                                         <span class="label-checkbox"></span> 
                                         <span class="label-helper">Filtro Combustible</span>                                           
@@ -154,7 +154,7 @@
                             <div class="col-sm-2 ">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
                                     
-                                    <input type="checkbox" id="aline_balance_alineacion" name="aline_balance_cambio[]" value="alineacion"  <?php echo (in_array('alineacion',$ficha['aline_balance_cambio']))?'checked':'';?> >
+                                    <input type="checkbox" id="aline_balance_alineacion" name="aline_balance_cambio[]" value="alineacion"  <?php echo (isset($ficha['aline_balance_cambio']) && in_array('alineacion',$ficha['aline_balance_cambio']))?'checked':'';?> >
                                     <label for="aline_balance_alineacion" class="mb-0">
                                         <span class="label-checkbox"></span>
                                         <span class="label-helper">Alineacíon</span>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
-                                    <input type="checkbox" id="aline_balance_balance" name="aline_balance_cambio[]" value="balance" <?php echo (in_array('balance',$ficha['aline_balance_cambio']))?'checked':'';?> >
+                                    <input type="checkbox" id="aline_balance_balance" name="aline_balance_cambio[]" value="balance" <?php echo (isset($ficha['aline_balance_cambio']) && in_array('balance',$ficha['aline_balance_cambio']))?'checked':'';?> >
                                     <label for="aline_balance_balance" class="mb-0">
                                         <span class="label-checkbox"></span>  
                                         <span class="label-helper">Balanceo</span>                                      
@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="customUi-checkbox check-todo checkboxUi-primary">
-                                    <input type="checkbox" id="aline_balance_rotacion" name="aline_balance_cambio[]" value="rotacion" <?php echo (in_array('rotacion',$ficha['aline_balance_cambio']))?'checked':'';?> >
+                                    <input type="checkbox" id="aline_balance_rotacion" name="aline_balance_cambio[]" value="rotacion" <?php echo (isset($ficha['aline_balance_cambio']) && in_array('rotacion',$ficha['aline_balance_cambio']))?'checked':'';?> >
                                     <label for="aline_balance_rotacion" class="mb-0">
                                         <span class="label-checkbox"></span> 
                                         <span class="label-helper">Rotacíon</span>                                           
