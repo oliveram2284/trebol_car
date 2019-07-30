@@ -73,11 +73,13 @@ class CategoriasModel extends CI_Model {
     }
 
     public function update($id,$data){
-
-        $this->nombre       = $data['nombre']; // please read the below note
-        $this->descripcion  = (isset($data['descripcion']))?$data['descripcion']:'';
-
-        $this->db->update('categorias', $this, array('id' => $id));
+        $data= array(
+            'id'       => $id,
+            'nombre'       => $data['nombre'],
+            'descripcion'  => (isset($data['descripcion']))?$data['descripcion']:'',            
+        );
+        
+        $this->db->update('categorias', $data, array('id' => $id));
         
     }
 

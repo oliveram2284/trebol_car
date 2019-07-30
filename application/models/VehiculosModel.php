@@ -222,16 +222,15 @@ class VehiculosModel extends CI_Model {
     }
 
     public function update($id,$data){
-
-        $this->categoria_id   = $data['categoria_id']; // please read the below note
-        $this->dominio        = $data['dominio'];
-        $this->marca          = $data['marca'];
-        $this->modelo         = $data['modelo'];
-        $this->anio           = $data['anio'];
-        $this->tipo           = $data['tipo'];
-        //$this->fecha_alta     = date('Y-m-d H:i:s');
-        $this->estado         = 1 ;  
-
+        $data=array(
+        'id'             => $id,
+        'categoria_id'   => $data['categoria_id'],
+        'dominio'        => $data['dominio'],
+        'marca'          => $data['marca'],
+        'modelo'         => $data['modelo'],
+        'anio'           => $data['anio'],
+        'tipo'           => $data['tipo'],
+        );
         $this->db->update('vehiculos', $this, array('id' => $id));
     }
 
