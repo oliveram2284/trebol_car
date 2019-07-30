@@ -43,7 +43,17 @@
                                             Inicio 
                                         </span>
                                     </a>
-                                </li>   
+                                </li> 
+                                <?php if($this->auth->allow('reservas')):?>
+                                    <li class="">
+                                        <i class="icon-Book nav-thumbnail"></i>
+                                        <a href="<?php echo base_url('/reservas')?>">
+                                            <span class="nav-text">
+                                                Reservas 
+                                            </span>
+                                        </a>
+                                    </li>
+                                <?php endif;?>  
                                 <?php if($this->auth->allow('categorias')):?>
                                     <li class="">
                                         <i class="icon-Tag nav-thumbnail"></i>

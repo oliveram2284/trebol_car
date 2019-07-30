@@ -344,4 +344,17 @@ class VehiculosModel extends CI_Model {
         return true;
 
     }
+
+
+    public function getByCategory($categoria_id){
+
+        if(!$categoria_id){
+            return false;
+        }
+
+        $query = $this->db->get_where('vehiculos',array('categoria_id'=>$categoria_id));
+        $result = $query->result_array();
+        
+        return $result;
+    }
 }

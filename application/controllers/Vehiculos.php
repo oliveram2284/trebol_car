@@ -22,7 +22,8 @@ class Vehiculos extends CI_Controller {
 
 
     public function add(){
-        
+
+
         $permisos=$this->auth->permisos();	
 
         $this->form_validation->set_rules('dominio', 'Dominio',
@@ -158,5 +159,12 @@ class Vehiculos extends CI_Controller {
         $result = $this->Vehiculos->ficha_add($id,$this->input->post()); 
         $this->session->set_flashdata('msg', 'Se ha creado una nueva ficha Técnica');
         redirect('vehiculos');
+    }
+
+
+    public function getByCategory($categoria_id){        
+        $data=array();
+        $vehiculos = $this->Vehiculos->getByCategory($categoria_id);
+        echo json_encode(array('status'=>'true','result'=>$vehiculos));
     }
 }
