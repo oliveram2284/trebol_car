@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
     function __construct(){
 		parent::__construct();
 		$this->load->model('Users');
-		//$this->load->model('Aportes');
+		$this->load->model('ReservasModel','Reservas');
 		//$this->load->model('Asistencias');
 		
 		
@@ -18,13 +18,18 @@ class Dashboard extends CI_Controller {
 		}
 		$permisos=$this->auth->permisos();
 
-		$data['totals']=array(
-			'adherents'=>0,
+		/*$data['totals']=array(
+			''=>0,
 			'aporte'=>0,
 			'asistencias'=>0,
 		);
 		$data['adherentes_ultimos']= array();
-		$data['recent_activities']= array();
+		$data['recent_activities']= array();*/
+
+		$data=array();
+		$data['reservas_confirmadas'] = 50;
+		$data['reservas_pendientes'] = 50;
+		$data['reservas_canceladas'] = 50;
 		
 		
 

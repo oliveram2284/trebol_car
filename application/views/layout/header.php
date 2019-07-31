@@ -18,6 +18,7 @@
         <link href="<?php  echo base_url();?>assets/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
         <link href="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.min" rel="stylesheet" />
         <link href="<?php  echo base_url();?>assets/lib/sweet-alerts2/sweetalert2.min.css" rel="stylesheet" />
+        <link href="<?php  echo base_url();?>assets/lib/fullcalendar/fullcalendar.min.css" rel="stylesheet">
        <!-- <link rel="shortcut icon" href="<?php  echo base_url();?>assets/images/suoem_logo_header.png" type="image/x-icon"> -->
         <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
