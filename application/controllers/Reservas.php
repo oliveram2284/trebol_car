@@ -19,8 +19,9 @@ class Reservas extends CI_Controller {
         //$data['vehiculos'] = $this->Vehiculos->get_list();
         $data['reservas'] = $this->Reservas->get_list();
         $data['categorias'] = $this->Categorias->get_list();
-		$this->load->view('reservas/index',$data);
-		$this->load->view('layout/footer');
+        $this->load->view('reservas/index',$data);
+        $data['scripts'][]='js_library/reservas/index.js';
+        $this->load->view('layout/footer',$data);
     }
 
     public function add(){
@@ -203,6 +204,39 @@ class Reservas extends CI_Controller {
 
     }
       
+  }
+
+
+  public function modal_vehiculo($reserva_id){
+    $data=array();
+    $reserva= $this->Reservas->getById($reserva_id);
+    //var_dump($reserva);
+    $data['category'] = $this->Categorias->getById($reserva['categoria_id']);
+    $data['vehiculos'] = $this->Vehiculos->getByCategory($reserva['categoria_id']);
+    $this->load->view('reservas/modal_vehiculo',$data);
+  }
+
+  public function setCar($reserva_id){
+    
+    $result=$this->Reservas->setVehiculo($reserva_id,$this->input->post('vehiculo_id'));
+    $this->session->set_flashdata('msg', 'Reserva Confirmada');
+    redirect('reservas');
+
+    return false;
+  }
+
+  public function confirm($reserva_id){
+    $result=$this->Reservas->cambioEstado($reserva_id,3);
+    $this->session->set_flashdata('msg', 'Reserva Activa');
+    redirect('reservas');
+    return false;
+  }
+
+  public function stop($reserva_id){
+    $result=$this->Reservas->cambioEstado($reserva_id,4);
+    $this->session->set_flashdata('msg', 'Reserva Finalizada');
+    redirect('reservas');
+    return false;
   }
 
 

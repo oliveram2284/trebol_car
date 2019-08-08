@@ -144,6 +144,7 @@ class ReservasModel extends CI_Model {
         $this->db->where("reservas.estado !=",'2');
         $this->db->order_by("reservas.entrega_fecha",'DESC');
         $result= $this->db->get();
+        //echo $this->db->last_query();
         return $result->result_array();
     }
 
@@ -154,22 +155,23 @@ class ReservasModel extends CI_Model {
     }
 
     public function insert($data){
-        $this->categoria_id      = $data['categoria_id']; // please read the below note
-        $this->vehiculo_id       = $data['vehiculo_id'];
-        $this->entrega_fecha     = $data['entrega_fecha'];
-        $this->entrega_hora      = $data['entrega_hora'];
-        $this->entrega_lugar     = $data['entrega_lugar'];
-        $this->devolucion_fecha  = $data['devolucion_fecha'];
-        $this->devolucion_hora   = $data['devolucion_hora'];
-        $this->devolucion_lugar  = $data['devolucion_lugar'];
-        $this->nombre            = $data['nombre'];
-        $this->adelanto          = $data['adelanto'];
-        $this->monto             = 0;
-        $this->observacion       = isset($data['observacion'])?$data['observation']:'';
-        $this->fecha_creacion    = date('Y-m-d H:i:s');
-        $this->estado            = 1 ;  
-
-        $this->db->insert('reservas', $this);
+        $param['categoria_id']= $data['categoria_id']; // please read the below note
+        $param['vehiculo_id']= $data['vehiculo_id'];
+        $param['entrega_fecha']= $data['entrega_fecha'];
+        $param['entrega_hora']= $data['entrega_hora'];
+        $param['entrega_lugar']= $data['entrega_lugar'];
+        $param['devolucion_fecha']= $data['devolucion_fecha'];
+        $param['devolucion_hora']= $data['devolucion_hora'];
+        $param['devolucion_lugar']= $data['devolucion_lugar'];
+        $param['nombre']= $data['nombre'];
+        $param['adelanto']= $data['adelanto'];
+        $param['monto']= 0;
+        $param['observacion']= isset($data['observacion'])?$data['observacion']:'';
+        $param['fecha_creacion']= date('Y-m-d H:i:s');
+        $param['estado']= ($data['vehiculo_id']!='' || $data['vehiculo_id']!='')?1:0 ;  
+        /*var_dump($param);
+        die("asd");*/
+        $this->db->insert('reservas', $param);
 
         return $this->db->insert_id();
     }
@@ -202,6 +204,41 @@ class ReservasModel extends CI_Model {
             'estado'=>1,
         );
         $this->db->insert('reservas_log',$reserva_log);        
+    }
+
+    public function setVehiculo($id,$vehiculo_id=0){
+
+        $last_reserva=$this->getById($id);
+
+        $this->db->update('reservas', array('vehiculo_id'=>$vehiculo_id,'estado'=>1), array('id' => $id));    
+        
+        $reserva_log= array(
+            'reserva_id'=>$id,
+            'reserva'=>json_encode($last_reserva),
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'estado'=>1,
+        );
+
+        $this->db->insert('reservas_log',$reserva_log); 
+
+        return;
+    }
+
+    public function cambioEstado($id, $estado=0){
+
+        $last_reserva=$this->getById($id);
+
+        $this->db->update('reservas', array('estado'=>$estado), array('id' => $id));    
+        
+        $reserva_log= array(
+            'reserva_id'=>$id,
+            'reserva'=>json_encode($last_reserva),
+            'fecha_creacion'=>date('Y-m-d H:i:s'),
+            'estado'=>1,
+        );
+        $this->db->insert('reservas_log',$reserva_log); 
+
+        return;
     }
 
     public function delete($id=false){
