@@ -31,11 +31,11 @@ class Reservas extends CI_Controller {
         )
       );	  
             
-      $this->form_validation->set_rules('vehiculo_id', 'Vehículo', 'required',
+      /*$this->form_validation->set_rules('vehiculo_id', 'Vehículo', 'required',
         array(
           'required'      => 'Debe seleccionar una %s.'
         )
-      );	     
+      );	 */    
         
       $this->form_validation->set_rules('entrega_fecha', 'Fecha De Entrega', 'required',
         array(
@@ -120,11 +120,11 @@ class Reservas extends CI_Controller {
       )
     );	  
           
-    $this->form_validation->set_rules('vehiculo_id', 'Vehículo', 'required',
+    /*$this->form_validation->set_rules('vehiculo_id', 'Vehículo', 'required',
       array(
         'required'      => 'Debe seleccionar una %s.'
       )
-    );	     
+    );	*/     
       
     $this->form_validation->set_rules('entrega_fecha', 'Fecha De Entrega', 'required',
       array(
@@ -211,5 +211,7 @@ class Reservas extends CI_Controller {
     $this->Reservas->delete($id);
     $this->session->set_flashdata('msg', 'Reserva Eliminada');
     redirect('reservas');
-}
+  }
+
+  
 }

@@ -25,10 +25,15 @@
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/data-tables/responsive.bootstrap4.min.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/jquery-typeahead/src/jquery.typeahead.js"></script>  
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/select2/dist/js/select2.min.js"></script>
+        
+        
+        
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.full.min.js"></script>
+        
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/moment.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/fullcalendar.min.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/js/plugins-custom/fullcalendar-custom.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
         
         
         <?php if(isset($scripts)):?>

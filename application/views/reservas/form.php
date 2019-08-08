@@ -73,7 +73,7 @@
                             <label id="marca-error" class="error" for="entrega_fecha"><?php echo form_error('entrega_fecha'); ?></label>
                         </div>
                         <label for="entrega_hora" class="col-sm-2 col-form-label text-right">Hora de Entrega</label>
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <input type="time" class="form-control" id="entrega_fecha" name="entrega_hora" value="<?php echo set_value('entrega_hora',$reserva['entrega_hora']); ?>" placeholder="Fecha de Entrega">
                             <label id="marca-error" class="error" for="entrega_hora"><?php echo form_error('entrega_hora'); ?></label>
                         </div>
@@ -95,7 +95,7 @@
                             <label id="devolucion_fecha-error" class="error" for="devolucion_fecha"><?php echo form_error('devolucion_fecha'); ?></label>
                         </div>
                         <label for="devolucion_hora" class="col-sm-2 col-form-label text-right">Hora de Devolución</label>
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <input type="time" class="form-control" id="devolucion_hora" name="devolucion_hora" value="<?php echo set_value('devolucion_hora',$reserva['devolucion_hora']); ?>" placeholder="Fecha de Entrega">
                             <label id="devolucion_hora-error" class="error" for="devolucion_hora"><?php echo form_error('devolucion_hora'); ?></label>
                         </div>

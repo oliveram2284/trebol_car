@@ -150,45 +150,10 @@
                                             Comercios 
                                         </span>
                                     </a>
-                                </li>
-                                
-                                <li>
-                                    <i class="icon-Money-Bag nav-thumbnail"></i>
-                                    <a href="<?php echo base_url('/')?>">
-                                        <span class="nav-text">
-                                            Mensajes 
-                                        </span>
-                                    </a>
-                                </li>Menu-item-->                                
-                                <!--Menu-item-->
-                                <!--
-                                <li class="">
-                                    <i class="icon-Monitor-Analytics nav-thumbnail"></i>
-                                    <a href="<?php echo base_url('/')?>">
-                                        <span class="nav-text">
-                                            Reportes
-                                        </span>
-                                    </a>
-                                </li>
-                                
-                                
+                                </li>                              
                                
-                                <li>
-                                    <i class="icon-Monitor nav-thumbnail"></i>
-                                    <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                        <span class="nav-text">Sistema</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li>
-                                            <span class="nav-thumbnail"></span>
-                                            <a href="<?php echo base_url('setting')?>">Configuración</a>
-                                        </li>
-                                        <li>
-                                            <span class="nav-thumbnail"></span>
-                                            <a href="<?php echo base_url('setting/export')?>">Exportar</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                
+                                
                                 -->
                             </ul>
                         </div><!-- aside content end-->

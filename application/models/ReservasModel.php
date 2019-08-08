@@ -140,8 +140,9 @@ class ReservasModel extends CI_Model {
         $this->db->select('reservas.*,categorias.nombre as categoria, vehiculos.dominio,vehiculos.marca,vehiculos.modelo,');
         $this->db->from('reservas');
         $this->db->join('categorias', 'categorias.id = reservas.categoria_id');
-        $this->db->join('vehiculos' , 'vehiculos.id  = reservas.vehiculo_id');
+        $this->db->join('vehiculos' , 'vehiculos.id  = reservas.vehiculo_id' , 'left');
         $this->db->where("reservas.estado !=",'2');
+        $this->db->order_by("reservas.entrega_fecha",'DESC');
         $result= $this->db->get();
         return $result->result_array();
     }

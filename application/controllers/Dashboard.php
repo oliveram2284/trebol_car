@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Users');
 		$this->load->model('ReservasModel','Reservas');
+		$this->load->model('CategoriasModel','Categorias');
 		//$this->load->model('Asistencias');
 		
 		
@@ -30,12 +31,14 @@ class Dashboard extends CI_Controller {
 		$data['reservas_confirmadas'] = 50;
 		$data['reservas_pendientes'] = 50;
 		$data['reservas_canceladas'] = 50;
-		
+		$data['categorias'] = $this->Categorias->get_list();
 		
 
 		$this->load->view('layout/header',array('permisos'=>$permisos));
+		
 		$this->load->view('dashboard',$data);
-		$this->load->view('layout/footer');
+		$data['scripts'][]='js_library/dashboard.js';
+        $this->load->view('layout/footer',$data);
 	}
 
 	public function login(){
