@@ -168,7 +168,7 @@ class ReservasModel extends CI_Model {
         $param['monto']= 0;
         $param['observacion']= isset($data['observacion'])?$data['observacion']:'';
         $param['fecha_creacion']= date('Y-m-d H:i:s');
-        $param['estado']= ($data['vehiculo_id']!='' || $data['vehiculo_id']!='')?1:0 ;  
+        $param['estado']= 1 ;  
         /*var_dump($param);
         die("asd");*/
         $this->db->insert('reservas', $param);
@@ -256,4 +256,26 @@ class ReservasModel extends CI_Model {
         );
         $this->db->insert('reservas_log',$reserva_log);       
     }
+
+
+    public function Activar(){
+        
+        $sql="UPDATE reservas  SET estado=3 WHERE CONCAT(entrega_fecha,' ',entrega_hora) <=NOW()   AND estado=1;";
+        $result= $this->db->query($sql);
+        return;
+
+    }
+
+
+    public function Finalizar(){
+        
+        $sql="UPDATE reservas  SET estado=4 WHERE CONCAT(devolucion_fecha,' ',devolucion_hora) <=NOW()   AND estado=3;";
+        $result= $this->db->query($sql);
+        
+        return;
+
+    }
+
+
+    
 }

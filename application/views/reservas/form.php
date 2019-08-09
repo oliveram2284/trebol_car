@@ -54,8 +54,8 @@
                             <label id="categoria_id-error" class="error" for="categoria_id"><?php echo form_error('categoria_id'); ?></label>
                         </div>
 
-                        <label for="vehiculo_id" class="col-sm-1 col-form-label">Vehículo</label>
-                        <div class="col-sm-2">                           
+                        <label for="vehiculo_id" class="col-sm-1 col-form-label invisible">Vehículo</label>
+                        <div class="col-sm-2 invisible">                           
                             <input type="hidden" id="edit_reserva_id" value="<?php echo (isset($reserva['vehiculo_id']))?$reserva['vehiculo_id']:'-1'?>">
                             <select name="vehiculo_id" id="vehiculo_id" class="form-control">
                                 <option value="">Seleccione una Vehiculo</option>

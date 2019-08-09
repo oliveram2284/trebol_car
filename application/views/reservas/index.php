@@ -60,7 +60,6 @@ $estados=array(
                     <th  class="text-center">Fecha Devolución</th>
                     <th  class="text-center">Hora Devolución</th>
                     <th  class="text-center">Categoría</th>
-                    <th  class="text-left">Vehículo</th>
                     <th  class="text-left">Cliente</th>
                     <th  class="text-right">Estado</th>
                     <th class="text-center">Acción</th>
@@ -77,14 +76,13 @@ $estados=array(
                             <td class="text-center" ><?php echo $reservas['devolucion_hora']?></td>
                             
                             <td class="text-center" ><?php echo $reservas['categoria']?></td>
-                            <td class="text-left" ><?php echo $reservas['dominio']." ".$reservas['marca']." ".$reservas['modelo']?>
                             
                             
                             <td class="text-left" ><?php echo $reservas['nombre']?></td>
                             <td class="text-right" ><?php echo $estados[$reservas['estado']]?></td>
-                            <td class="text-right">
+                            <td class="text-center">
 
-                                <?php switch($reservas['estado']): 
+                                <?php /*switch($reservas['estado']): 
                                     case 0: ?>
 
                                         <a href="<?php echo base_url('/reservas/setCar/'.$reservas['id'])?>" data-id="<?php echo $reservas['id']?>" class="setCar_bt btn  btn-icon-o btn-sm btn-warning radius100 btn-icon-sm mr-1 mb-1 " title="ASIGNAR AUTO" alt="ASIGNAR AUTO"><i class="icon-Car"></i></a>
@@ -96,7 +94,8 @@ $estados=array(
                                         <a href="<?php echo base_url('/reservas/setCar/'.$reservas['id'])?>" class="setCar_bt btn  btn-icon-o btn-sm btn-warning radius100 btn-icon-sm mr-1 mb-1 disabled " title="ASIGNAR AUTO" alt="ASIGNAR AUTO"><i class="icon-Car"></i></a>
                                         <a href="<?php echo base_url('/reservas/confirm/'.$reservas['id'])?>" class="confirm_bt btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-1 mb-1 " title="ACTIVAR" alt="ACTIVAR"><i class="fa fa-check"></i></a>
                                         <a href="<?php echo base_url('/reservas/stop/'.$reservas['id'])?>" class="end_bt  btn  btn-icon-o btn-sm btn-pink radius100 btn-icon-sm mr-1 mb-1 disabled" title="FINALIZAR" alt="FINALIZAR"><i class="fa fa-stop"></i></a>
-                                
+
+                                        
                                     <?php break; case 3:?>
 
                                         <a href="<?php echo base_url('/reservas/setCar/'.$reservas['id'])?>" class="setCar_bt btn  btn-icon-o btn-sm btn-warning radius100 btn-icon-sm mr-1 mb-1 disabled" title="ASIGNAR AUTO" alt="ASIGNAR AUTO"><i class="icon-Car"></i></a>
@@ -115,7 +114,8 @@ $estados=array(
                                         <a href="<?php echo base_url('/reservas/setCar/'.$reservas['id'])?>" class="setCar_bt btn  btn-icon-o btn-sm btn-warning radius100 btn-icon-sm mr-1 mb-1 disabled" title="ASIGNAR AUTO" alt="ASIGNAR AUTO"><i class="icon-Car"></i></a>
                                         <a href="<?php echo base_url('/reservas/confirm/'.$reservas['id'])?>" class="confirm_bt btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-1 mb-1 disabled " title="ACTIVAR" alt="ACTIVAR"><i class="fa fa-check"></i></a>
                                         <a href="<?php echo base_url('/reservas/stop/'.$reservas['id'])?>" class="end_bt  btn  btn-icon-o btn-sm btn-pink radius100 btn-icon-sm mr-1 mb-1 disabled " title="FINALIZAR" alt="FINALIZAR"><i class="fa fa-stop"></i></a>
-                                
+
+
                                     <?php break; default:?>
 
                                         <a href="<?php echo base_url('/reservas/setCar/'.$reservas['id'])?>" class="setCar_bt btn  btn-icon-o btn-sm btn-warning radius100 btn-icon-sm mr-1 mb-1 disabled" title="ASIGNAR AUTO" alt="ASIGNAR AUTO"><i class="icon-Car"></i></a>
@@ -123,9 +123,11 @@ $estados=array(
                                         <a href="<?php echo base_url('/reservas/stop/'.$reservas['id'])?>" class="end_bt btn  btn-icon-o btn-sm btn-pink radius100 btn-icon-sm mr-1 mb-1 disabled " title="FINALIZAR" alt="FINALIZAR"><i class="fa fa-stop"></i></a>
                                 
                                     <?php break; ?>
-                                <?php endswitch;?>    
+                                <?php endswitch; */?>    
                                
-                                <a href="<?php echo base_url('/reservas/view/'.$reservas['id'])?>" class="view_bt btn  btn-icon-o btn-sm btn-outline-primary radius100 btn-icon-sm mr-1 mb-1" title="EDITAR" alt="EDITAR" ><i class="icon-Eye" style="color:#000;"></i></a>
+                                <a href="<?php echo base_url('/reservas/edit/'.$reservas['id'])?>" class="btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-1 mb-1" title="EDITAR" alt="EDITAR" ><i class="icon-Pencil"></i></a>
+                                <a href="<?php echo base_url('/reservas/delete/'.$reservas['id'])?>" class="btn btn-icon-o btn-sm btn-danger radius100 btn-icon-sm mr-1 mb-1"  title="ANULAR" alt="ANULAR"><i class="icon-Can"></i></a>
+                                
                                 <!-- <a href="<?php echo base_url('/reservas/view/'.$reservas['id'])?>" class="btn  btn-icon-o btn-sm btn-outline-primary radius100 btn-icon-sm mr-1 mb-1" title="EDITAR" alt="EDITAR" ><i class="icon-Eye" style="color:#000;"></i></a>
                                 
                                 <a href="<?php echo base_url('/reservas/edit/'.$reservas['id'])?>" class="btn  btn-icon-o btn-sm btn-success radius100 btn-icon-sm mr-1 mb-1" title="EDITAR" alt="EDITAR" ><i class="icon-Pencil"></i></a>

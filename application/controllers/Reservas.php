@@ -16,7 +16,12 @@ class Reservas extends CI_Controller {
         $this->load->view('layout/header',array('permisos'=>$permisos));
         $data=array();
         
-        //$data['vehiculos'] = $this->Vehiculos->get_list();
+        //Activar REservas
+        $this->Reservas->Activar();
+
+        //Finalizar REservas
+        $this->Reservas->Finalizar();
+
         $data['reservas'] = $this->Reservas->get_list();
         $data['categorias'] = $this->Categorias->get_list();
         $this->load->view('reservas/index',$data);
