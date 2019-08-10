@@ -277,5 +277,28 @@ class ReservasModel extends CI_Model {
     }
 
 
+    public function consultar($date,$categoria_id=null){
+
+        $where_categoria='';
+
+        if(!is_null($categoria_id) && $categoria_id!=''){
+            $where_categoria=" AND reservas.categoria_id=".$categoria_id." ";
+        }
+        
+
+        $sql=" SELECT  categoria_id,
+                       (SELECT nombre FROM categorias WHERE categorias.id=reservas.categoria_id ) AS categoria,
+                       COUNT(*) AS reservas,
+                       (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=reservas.categoria_id) AS total 
+                       FROM reservas 
+                       where CONCAT(entrega_fecha,' ',entrega_hora)>='2019-08-12 18:00' $where_categoria
+                       GROUP BY categoria_id 
+                       order by categoria_id;";
+        $result= $this->db->query($sql);
+        //echo $this->db->last_query();
+        return $result->result_array();
+    }
+
+
     
 }

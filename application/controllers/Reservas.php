@@ -252,5 +252,20 @@ class Reservas extends CI_Controller {
     redirect('reservas');
   }
 
+
+  public function consulta(){
+    
+    $date=str_replace('/','-',$this->input->post('fecha'));
+    $date=date('Y-m-d H:i',strtotime($date));
+    $categoria_id = (!is_null($this->input->post('categoria_id')))?$this->input->post('categoria_id'):null; //( isset()) ? $this->input->post('category_id') : null;
+    
+    $data=array();
+    $data['result']=$this->Reservas->consultar($date, $categoria_id);
+
+    //var_dump($result);
+    //return false;
+    $this->load->view('reservas/consulta',$data);
+  }
+
   
 }

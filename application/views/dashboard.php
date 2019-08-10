@@ -130,7 +130,7 @@
                                 <h3> <i class="icon-Calendar"></i> Consultar Disponibilidad</h3> 
                             </div>                                        
                         </div>
-                        <div class="portlet-body">  
+                        <div class="portlet-body" style="min-height: 250px;">  
                             <div class="filter">
                                 <div class="form-group">
                                     <label>Fecha</label>
@@ -146,14 +146,14 @@
                                         <?php endforeach;?>
                                     </select>
                                 </div>       
-                                <div class="form-group float-lg-right mb-40">                                 
-                                    <button id="filter_bt" class="btn btn-primary mr-1 mb-30 "> Consultar</button>
+                                <div class="form-group float-lg-right ">                                 
+                                    <button id="filter_bt" class="btn btn-primary mr-1  "> Consultar</button>
                                     <br>
                                     <br>
                                 </div>
                             </div>
                             
-                            <div class="filter_result">
+                            <div class="filter_result mt-10 ">
                                 
                             </div>  
                         </div>
@@ -177,4 +177,7 @@
             </div>
         </div>
     </div>
+
+    
+<input type="hidden" value="<?php echo base_url();?>" id="url">
     
