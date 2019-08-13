@@ -16,7 +16,7 @@
         <link href="<?php  echo base_url();?>assets/lib/data-tables/responsive.bootstrap4.min.css" rel="stylesheet">
         <link href="<?php  echo base_url();?>assets/css/style.css" rel="stylesheet">
         <link href="<?php  echo base_url();?>assets/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
-        <link href="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.min" rel="stylesheet" />
+        <link href="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.min.css" rel="stylesheet" />
         <link href="<?php  echo base_url();?>assets/lib/sweet-alerts2/sweetalert2.min.css" rel="stylesheet" />
         <link href="<?php  echo base_url();?>assets/lib/fullcalendar/fullcalendar.min.css" rel="stylesheet">
        <!-- <link rel="shortcut icon" href="<?php  echo base_url();?>assets/images/suoem_logo_header.png" type="image/x-icon"> -->

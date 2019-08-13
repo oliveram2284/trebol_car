@@ -12,16 +12,16 @@
             <?php 
                 $class="";
                 //table-danger
-                if( (int)$row['reservas'] < $row['total']){
+                if( (int)$row['reservas'] < $row['vehiculos']){
                     $class="table-success";
-                }elseif( (int)$row['reservas'] >= $row['total']) {
+                }elseif( (int)$row['reservas'] >= $row['vehiculos']) {
                     $class="table-danger";
                 }
             ?>
             <tr class="<?php echo $class?>">
-                <td class="text-center" ><?php echo $row['categoria']?></td>
+                <td class="text-center" ><?php echo $row['nombre']?></td>
                 <td class="text-center"><?php echo $row['reservas']?></td>
-                <td class="text-center"><?php echo ((int)$row['total']-(int)$row['reservas'])?></td>
+                <td class="text-center"><?php echo ((int)$row['vehiculos']-(int)$row['reservas'])?></td>
             </tr>
         <?php endforeach;?>
     </tbody>

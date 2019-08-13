@@ -279,6 +279,63 @@ class ReservasModel extends CI_Model {
 
     public function consultar($date,$categoria_id=null){
 
+        
+        if($categoria_id==''){
+            $this->db->select("id,nombre, (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=categorias.id) AS vehiculos");
+            $query = $this->db->get('categorias');
+
+            
+            $reservas=array();
+            foreach ($query->result_array() as $key => $category) {
+               
+                $temp=$category;
+
+                $where_categoria=" AND reservas.categoria_id=".$category['id']." ";
+                $sql=" SELECT
+                       COUNT(*) AS reservas                   
+                       FROM reservas 
+                       where CONCAT(entrega_fecha,' ',entrega_hora)>='".$date."' $where_categoria
+                       GROUP BY categoria_id 
+                       order by categoria_id;";
+                $result= $this->db->query($sql);
+                $result= $result->row_array();
+               
+                $result= (!is_null($result))?(int)$result['reservas']:0;
+                $temp['reservas']=$result;
+                $reservas[]=$temp;
+            }
+
+            return $reservas;
+        }else{
+
+            $this->db->select("id,nombre, (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=categorias.id) AS vehiculos");
+            $this->db->where('id',$categoria_id);
+            $query = $this->db->get('categorias');
+
+            
+            $reservas=array();
+            foreach ($query->result_array() as $key => $category) {
+               
+                $temp=$category;
+
+                $where_categoria=" AND reservas.categoria_id=".$category['id']." ";
+                $sql=" SELECT
+                       COUNT(*) AS reservas                   
+                       FROM reservas 
+                       where CONCAT(entrega_fecha,' ',entrega_hora)>='".$date."' $where_categoria
+                       GROUP BY categoria_id 
+                       order by categoria_id;";
+                $result= $this->db->query($sql);
+                $result= $result->row_array();
+               
+                $result= (!is_null($result))?(int)$result['reservas']:0;
+                $temp['reservas']=$result;
+                $reservas[]=$temp;
+            }
+
+            return $reservas;
+        }
+        return array();
         $where_categoria='';
 
         if(!is_null($categoria_id) && $categoria_id!=''){
@@ -291,7 +348,7 @@ class ReservasModel extends CI_Model {
                        COUNT(*) AS reservas,
                        (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=reservas.categoria_id) AS total 
                        FROM reservas 
-                       where CONCAT(entrega_fecha,' ',entrega_hora)>='2019-08-12 18:00' $where_categoria
+                       where CONCAT(entrega_fecha,' ',entrega_hora)>='".$date."' $where_categoria
                        GROUP BY categoria_id 
                        order by categoria_id;";
         $result= $this->db->query($sql);
