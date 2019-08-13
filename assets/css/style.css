@@ -8547,7 +8547,7 @@ App calendar custom
     border-radius: 0px;
     color: #e5f2ff !important;
     height: auto;
-    padding: .5rem .5rem;
+    padding: .2rem .2rem !important;
     font-weight: 500;
 }
 

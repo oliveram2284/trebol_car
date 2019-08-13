@@ -338,5 +338,22 @@ class ReservasModel extends CI_Model {
     }
 
 
+
+    public function calendario($params){
+        /*var_dump($params);
+        die("fin");*/
+        $start=$params['start'];
+        $end=$params['end'];
+        $sql=" SELECT *                   
+                FROM reservas 
+                where entrega_fecha>='".$start."' AND devolucion_fecha<='".$end."'
+                order by entrega_fecha;";
+        $query= $this->db->query($sql);      
+        $results= $query->result_array();
+
+        return $results;
+    }
+
+
     
 }

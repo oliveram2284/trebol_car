@@ -32,7 +32,8 @@
         
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/moment.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/fullcalendar.min.js"></script>
-        <script type="text/javascript" src="<?php  echo base_url();?>assets/js/plugins-custom/fullcalendar-custom.js"></script>
+        <!--
+        <script type="text/javascript" src="<?php  echo base_url();?>assets/js/plugins-custom/fullcalendar-custom.js"></script> -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/sweet-alerts2/sweetalert2.min.js"></script>
         

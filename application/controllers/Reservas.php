@@ -267,5 +267,12 @@ class Reservas extends CI_Controller {
     $this->load->view('reservas/consulta',$data);
   }
 
+
+  public function calendario(){
+
+    $eventos=$this->Reservas->calendario($this->input->post());
+    echo json_encode(array('status'=>'true','result'=>$eventos));
+  }
+
   
 }
