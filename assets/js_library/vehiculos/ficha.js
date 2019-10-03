@@ -21,7 +21,7 @@ $(document).ready(function() {
         var input_id=input_name.trim();
 
 
-        var item_output='';
+        var item_output='';/*
         item_output+='<div class="form-group row">';
         item_output+='<label for="modelo" class="col-sm-2 col-form-label">'+input_label+'</label>';
         item_output+='<div class="col-sm-4">';
@@ -32,6 +32,21 @@ $(document).ready(function() {
         item_output+='</div>';
         item_output+='';
         item_output+='</div>';
+*/  
+        item_output+='<fieldset> <legend>'+input_label+'</legend>';
+        item_output+='<div class="form-group row">';
+        item_output+='  <label for="modelo" class="col-sm-2 col-form-label">Fecha</label>';
+        item_output+='  <div class="col-sm-2">';
+        item_output+='      <input type="date" class="form-control text-right" id="'+input_id+'_fecha" name="otro_item['+input_name+'][fecha]" placeholder="'+input_label+'">';
+        item_output+='  </div>';
+        item_output+='</div>';
+        item_output+='<div class="form-group row">';
+        item_output+='  <label for="modelo" class="col-sm-2 col-form-label">Observación</label>';
+        item_output+='  <div class="col-sm-4">';
+        item_output+='      <input type="text" class="form-control text-right" id="'+input_id+'_observacion" name="otro_item['+input_name+'][observacion]" placeholder="Observación">';
+        item_output+='  </div>';
+        item_output+='</div>';
+        item_output+='</fieldset>';
 
         $("#otros_arreglos_inputs").append(item_output);
         return false;

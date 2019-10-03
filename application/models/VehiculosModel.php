@@ -185,6 +185,27 @@ class VehiculosModel extends CI_Model {
             )
         )); 
         $this->dbforge->create_table('vechiculo_ficha_tecnica_log',true);
+
+
+
+        if (!$this->db->field_exists('rto_venc', 'vechiculo_ficha_tecnica')){
+            $fields = array(
+                'rto_venc'      => array('type' => 'VARCHAR','constraint' => '200','DEFAULT' =>'','AFTER'=>'seguro_venc'),            
+                'codigo_radio'  => array('type' => 'VARCHAR','constraint' => '200','DEFAULT' =>'','AFTER'=>'rto_venc'),            
+            );
+            $this->dbforge->add_column('vechiculo_ficha_tecnica', $fields); 
+        }
+
+        if (!$this->db->field_exists('matafuego_venc', 'vechiculo_ficha_tecnica')){
+            $fields = array(
+                'matafuego_venc'      => array('type' => 'VARCHAR','constraint' => '200','DEFAULT' =>'','AFTER'=>'rto_venc'),    
+            );
+            $this->dbforge->add_column('vechiculo_ficha_tecnica', $fields); 
+        }
+
+        
+
+        
     }
 
     public function get_list(){
@@ -231,7 +252,8 @@ class VehiculosModel extends CI_Model {
         'anio'           => $data['anio'],
         'tipo'           => $data['tipo'],
         );
-        $this->db->update('vehiculos', $this, array('id' => $id));
+       
+        $this->db->update('vehiculos', $data, array('id' => $id));
     }
 
     public function delete($id=false){
@@ -254,6 +276,11 @@ class VehiculosModel extends CI_Model {
             $result['tarjeta_verde_venc']='';
             $result['seguro']='';
             $result['seguro_venc']='';
+            $result['rto_venc']='';
+            $result['matafuego_venc']='';
+            
+            $result['codigo_radio']='';
+            
             $result['cambio_aceite_fecha']='';
             $result['cambio_aceite_km']='';
             $result['cambio_aceite_filtro']=array();
@@ -283,6 +310,10 @@ class VehiculosModel extends CI_Model {
         $params['vehiculo_id']=$vehiculo_id;
         $params['tarjeta_verde_venc']=$data['tarjeta_verde_venc'];
         $params['seguro']=$data['seguro'];
+        $params['seguro_venc']=$data['seguro_venc'];
+        $params['rto_venc']=$data['rto_venc'];
+        $params['matafuego_venc']=$data['matafuego_venc'];
+        $params['codigo_radio']=$data['codigo_radio'];
         $params['seguro_venc']=$data['seguro_venc'];
         $params['cambio_aceite_fecha']=$data['cambio_aceite_fecha'];
         $params['cambio_aceite_km']=$data['cambio_aceite_km'];

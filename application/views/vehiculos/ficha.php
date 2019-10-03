@@ -72,6 +72,31 @@
                             <label id="seguro_venc-error" class="error" for="seguro_venc"><?php echo form_error('seguro_venc'); ?></label>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="rto_venc" class="col-sm-2 col-form-label">Vencimiento RTO</label>
+                        <div class="col-sm-3">
+                       
+                            <input type="date" class="form-control" id="rto_venc" name="rto_venc" value="<?php echo set_value('rto_venc',($ficha['rto_venc'])?$ficha['rto_venc']:null); ?>" placeholder="Vencimiento RTO">
+                            <label id="rto_venc-error" class="error" for="seguro"><?php echo form_error('rto_venc'); ?></label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="rto_venc" class="col-sm-2 col-form-label">Matafuego Vencimiento</label>
+                        <div class="col-sm-3">
+                       
+                            <input type="date" class="form-control" id="matafuego_venc" name="matafuego_venc" value="<?php echo set_value('matafuego_venc',($ficha['matafuego_venc'])?$ficha['matafuego_venc']:null); ?>" placeholder="Matafuego Vencimiento">
+                            <label id="rto_venc-error" class="error" for="matafuego_venc"><?php echo form_error('matafuego_venc'); ?></label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="codigo_radio" class="col-sm-2 col-form-label">Código de Radio</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="codigo_radio" name="codigo_radio" value="<?php echo set_value('codigo_radio',$ficha['codigo_radio']); ?>" placeholder="Código Radio">
+                            <label id="codigo_radio-error" class="error" for="codigo_radio"><?php echo form_error('codigo_radio'); ?></label>
+                        </div>                        
+                    </div>
+
                     </fieldset>
 
                     
@@ -221,20 +246,28 @@
                                 <button id="addItem_bt"type="button" class="btn  btn-primary btn-block"><i class="fas fa-plus"></i>Agregar</button>
                             </div>
                         </div>    
-                        <div id="otros_arreglos_inputs">
-                            <?php foreach($ficha['otros'] as $key=>$input):?>
+                        
+                    </fieldset>
+
+                    <div id="otros_arreglos_inputs">
+                        <?php foreach($ficha['otros'] as $key=>$input):?>
+                            <fieldset>
+                                <legend><?php echo ucwords($key)?></legend>
                                 <div class="form-group row">
-                                    <label for="<?php echo $key?>" class="col-sm-2 col-form-label"><?php echo ucwords($key)?></label>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control text-right" id="<?php echo $key?>_observacion" name="otro_item[<?php echo $key?>][observacion]" placeholder="<?php echo $key?>" value="<?php echo $input['observacion']?>">
-                                    </div>
-                                    <div class="col-sm-2">
+                                    <label for="<?php echo $key?>_fecha" class="col-sm-2 col-form-label">Fecha</label>                                   
+                                    <div class="col-sm-3">
                                         <input type="date" class="form-control text-right" id="<?php echo $key?>_fecha" name="otro_item[<?php echo $key?>][fecha]" placeholder="<?php echo $key?>" value="<?php echo $input['fecha']?>">
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
-                        </div>   
-                    </fieldset>
+                                <div class="form-group row">
+                                    <label for="<?php echo $key?>_observacion" class="col-sm-2 col-form-label">Fecha</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control text-right" id="<?php echo $key?>_observacion" name="otro_item[<?php echo $key?>][observacion]" placeholder="<?php echo $key?>" value="<?php echo $input['observacion']?>">
+                                    </div>                                    
+                                </div>
+                            </fieldset>
+                        <?php endforeach; ?>
+                    </div>   
                     
                     <div class="form-group row">
                         <div class="col-sm-2 float-left">

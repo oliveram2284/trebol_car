@@ -141,7 +141,9 @@ class Vehiculos extends CI_Controller {
     }
 
     public function ficha($id){
+ 
 
+        
         $permisos=$this->auth->permisos();	
         $this->load->view('layout/header',array('permisos'=>$permisos));
         $data=array();
