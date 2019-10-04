@@ -157,6 +157,8 @@ class Vehiculos extends CI_Controller {
        
     }
 
+   
+
     public function ficha_save($id){
         $result = $this->Vehiculos->ficha_add($id,$this->input->post()); 
         $this->session->set_flashdata('msg', 'Se ha creado una nueva ficha Técnica');
@@ -168,5 +170,13 @@ class Vehiculos extends CI_Controller {
         $data=array();
         $vehiculos = $this->Vehiculos->getByCategory($categoria_id);
         echo json_encode(array('status'=>'true','result'=>$vehiculos));
+    }
+
+    public function get_ficha_historial($ficha_id){
+        $historial = $this->Vehiculos->getFichaHistorial($ficha_id);
+      
+        $output= $this->load->view('vehiculos/ficha_historial',array('historial'=>$historial));
+
+        echo json_encode(array('status'=>'true','html'=>$output));
     }
 }

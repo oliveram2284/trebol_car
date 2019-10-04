@@ -399,4 +399,22 @@ class VehiculosModel extends CI_Model {
         
         return $result;
     }
+
+
+    public function getFichaHistorial($ficha_id){
+        $query = $this->db->get_where('vechiculo_ficha_tecnica_log',array('ficha_id'=>$ficha_id));
+        
+        $result = $query->result_array();
+        $response =array();
+        foreach ($result as $key => $row) {
+            
+            $temp=$row;
+            $temp['ficha']=json_decode($row['ficha_data'],true);
+            unset($temp['ficha_data']);
+           
+            $response[]=$temp;
+        }
+        
+        return $response;
+    }
 }

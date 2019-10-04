@@ -1,6 +1,6 @@
 $(document).ready(function() {
     console.log("LOAD FICHA JS SCRIPT");
-
+    var url = $("#url").val();
     $("#addItem_bt").click(function(){
 
         var inputItem=$("#inputItem").val();
@@ -51,4 +51,21 @@ $(document).ready(function() {
         $("#otros_arreglos_inputs").append(item_output);
         return false;
     });
+
+
+
+    $("#ver_historial").on('click',function(){
+        console.log("====> ver_historial clicked");
+        $("#historial_modal").modal("show");
+        var id=$("#ficha_id").val();
+        console.log("====> ver_historial clicked id: %o",id);
+        console.log("====> ver_historial clicked id: %o",url + 'vehiculos/get_ficha_historial/'+id);
+     
+        $("#historial_modal .modal-body").load(url + 'vehiculos/get_ficha_historial/'+id,function (response) {
+            console.log("====> response: %o",response);
+            /*$(this).find('form').attr('action',href);
+            $("#modal1").modal("show");*/
+        });
+        return false;
+    })
 });

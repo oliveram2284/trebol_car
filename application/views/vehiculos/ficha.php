@@ -45,16 +45,18 @@
                     <div class="col-sm-12">
                     <?php echo form_open($action,array('method'=>'post','class'=>'pl-30')); ?>   
                         <input type="hidden" name="vehiculo_id" value="<?php echo $vehiculo_id?>">                
-                        <input type="hidden" name="id" value="<?php echo (isset($ficha['id']))?$ficha['id']:''?>">                
+                        <input type="hidden" name="id" id="ficha_id" value="<?php echo (isset($ficha['id']))?$ficha['id']:''?>">                
                     <fieldset>
                         
                         <div class="row">
                             <div class="col-6">
                             <legend>Datos Vehículo</legend>
                             </div>
-                            <div class="col-6 pt-2">
-                            <a href="#" class="btn btn-link">Ver Historial Ficha</a>
-                            </div>
+                            <?php if(isset($ficha['id'])):?>
+                                <div class="col-6 pt-2">
+                                    <button id="ver_historial" class="btn btn-link" data-ficha_id="<?php echo (isset($ficha['id']))?$ficha['id']:''?>">Ver Historial Ficha</button>
+                                </div>
+                            <?php endif;?>
                         </div>
                         <div class="form-group row">
                         <label for="dominio" class="col-sm-2 col-form-label">Dominio</label>
@@ -317,9 +319,23 @@
     </div>
 </div>
 
-<script>
 
-</script>
-
-
-
+<input type="hidden" value="<?php echo base_url();?>" id="url">
+<div class="modal" id="historial_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document" style="max-widht=1024px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Historial Ficha Técnica</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
