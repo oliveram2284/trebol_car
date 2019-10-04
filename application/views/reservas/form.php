@@ -53,7 +53,12 @@
                             </select>
                             <label id="categoria_id-error" class="error" for="categoria_id"><?php echo form_error('categoria_id'); ?></label>
                         </div>
-
+                        <label for="dominio" class="col-sm-1 col-form-label text-right">Dominio</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="dominio" name="dominio" value="<?php echo set_value('dominio',$reserva['dominio']); ?>" placeholder="Dominio">
+                            <label id="dominio-error" class="error" for="dominio"><?php echo form_error('dominio'); ?></label>
+                        </div>
+                        
                         <label for="vehiculo_id" class="col-sm-1 col-form-label invisible">Vehículo</label>
                         <div class="col-sm-2 invisible">                           
                             <input type="hidden" id="edit_reserva_id" value="<?php echo (isset($reserva['vehiculo_id']))?$reserva['vehiculo_id']:'-1'?>">
@@ -62,7 +67,7 @@
                                 
                             </select>
                             <label id="vehiculo_id-error" class="error" for="vehiculo_id"><?php echo form_error('vehiculo_id'); ?></label>
-                        </div>     
+                        </div>  
                         
                     </div>
 
@@ -120,6 +125,16 @@
                             
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="telefono" class="col-sm-2 col-form-label">Teléfono / Celular</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control  <?php echo (form_error('telefono')!='')?'error':''?>" id="telefono" name="telefono" value="<?php echo set_value('telefono',$reserva['telefono']); ?>" placeholder="Teléfono / Celular">
+                            <label id="telefono-error" class="error" for="telefono"><?php echo form_error('telefono'); ?></label>
+                            
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="adelanto" class="col-sm-2 col-form-label">Seña</label>
                         <div class="col-sm-6">

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     console.log("LOAD RESERVA FORM JS");
-
+    //$("#entrega_fecha").entrega_fecha
     $("#categoria_id").change(function(){
         console.log("====> category_id change: %o",$(this).val());
         var id = $(this).val();

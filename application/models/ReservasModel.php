@@ -134,17 +134,33 @@ class ReservasModel extends CI_Model {
 
 
         $this->dbforge->create_table('reservas_log',true);
+
+
+        if (!$this->db->field_exists('telefono', 'reservas')){
+            $fields = array(
+                'telefono'      => array('type' => 'VARCHAR','constraint' => '150','DEFAULT' =>'','AFTER'=>'nombre'),        
+            );
+            $this->dbforge->add_column('reservas', $fields); 
+        }
+        if (!$this->db->field_exists('dominio', 'reservas')){
+            $fields = array(
+                'dominio'      => array('type' => 'VARCHAR','constraint' => '50','DEFAULT' =>'','AFTER'=>'vehiculo_id'),        
+            );
+            $this->dbforge->add_column('reservas', $fields); 
+        }
     }
 
     public function get_list(){
-        $this->db->select('reservas.*,categorias.nombre as categoria, vehiculos.dominio,vehiculos.marca,vehiculos.modelo,');
+        $this->db->select('reservas.*,categorias.nombre as categoria, vehiculos.dominio as "vehiculos_dominio",vehiculos.marca,vehiculos.modelo');
         $this->db->from('reservas');
         $this->db->join('categorias', 'categorias.id = reservas.categoria_id');
         $this->db->join('vehiculos' , 'vehiculos.id  = reservas.vehiculo_id' , 'left');
         $this->db->where("reservas.estado !=",'2');
-        $this->db->order_by("reservas.entrega_fecha",'DESC');
+        $this->db->where("reservas.devolucion_fecha>NOW()");
+        $this->db->order_by("reservas.entrega_fecha",'ASC');
         $result= $this->db->get();
         //echo $this->db->last_query();
+        //var_dump($result->result_array());
         return $result->result_array();
     }
 
@@ -157,6 +173,7 @@ class ReservasModel extends CI_Model {
     public function insert($data){
         $param['categoria_id']= $data['categoria_id']; // please read the below note
         $param['vehiculo_id']= $data['vehiculo_id'];
+        $param['dominio']= $data['dominio'];
         $param['entrega_fecha']= $data['entrega_fecha'];
         $param['entrega_hora']= $data['entrega_hora'];
         $param['entrega_lugar']= $data['entrega_lugar'];
@@ -164,6 +181,7 @@ class ReservasModel extends CI_Model {
         $param['devolucion_hora']= $data['devolucion_hora'];
         $param['devolucion_lugar']= $data['devolucion_lugar'];
         $param['nombre']= $data['nombre'];
+        $param['telefono']= $data['telefono'];
         $param['adelanto']= $data['adelanto'];
         $param['monto']= 0;
         $param['observacion']= isset($data['observacion'])?$data['observacion']:'';
@@ -184,6 +202,7 @@ class ReservasModel extends CI_Model {
             'id'      => $id, // please read the below note
             'categoria_id'      => $data['categoria_id'], // please read the below note
             'vehiculo_id'       => $data['vehiculo_id'],
+            'dominio'           => $data['dominio'],
             'entrega_fecha'     => $data['entrega_fecha'],
             'entrega_hora'      => $data['entrega_hora'],
             'entrega_lugar'     => $data['entrega_lugar'],
@@ -191,6 +210,7 @@ class ReservasModel extends CI_Model {
             'devolucion_hora'   => $data['devolucion_hora'],
             'devolucion_lugar'  => $data['devolucion_lugar'],
             'nombre'            => $data['nombre'],
+            'telefono'          => $data['telefono'],
             'adelanto'          => $data['adelanto'],
             'observacion'       => isset($data['observacion'])?$data['observacion']:'',
         );

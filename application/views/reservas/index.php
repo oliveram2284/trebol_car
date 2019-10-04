@@ -54,13 +54,15 @@ $estados=array(
             <table id="data-table" class="table mb-0 table-striped cell-border compact stripe" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th  class="text-center" >#</th>
-                    <th  class="text-center">Fecha Entrega</th>
-                    <th  class="text-center">Hora Entrega</th>
-                    <th  class="text-center">Fecha Devolución</th>
-                    <th  class="text-center">Hora Devolución</th>
+                
                     <th  class="text-center">Categoría</th>
+                    <th  class="text-center">Entrega </th>                    
+                    <th  class="text-center">Entrega Lugar</th>                    
                     <th  class="text-left">Cliente</th>
+                    <th  class="text-center">Devolución</th>
+                    <th  class="text-center">Devolución Lugar</th>                    
+
+                    <th  class="text-center">Dominio</th>
                     <th  class="text-right">Estado</th>
                     <th class="text-center">Acción</th>
                 </tr>
@@ -68,17 +70,15 @@ $estados=array(
                 <tbody>
                     <?php foreach($reservas as $key=>$reservas):?>
                         <tr>
-                            <td class="text-center" ><?php echo $key+1?></td>
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?></td>
-                            <td class="text-center" ><?php echo $reservas['entrega_hora']?></td>
-                            
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?></td>
-                            <td class="text-center" ><?php echo $reservas['devolucion_hora']?></td>
-                            
-                            <td class="text-center" ><?php echo $reservas['categoria']?></td>
-                            
-                            
+                                                      
+                            <td class="text-center" ><?php echo $reservas['categoria']?></td>   
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?><?php echo $reservas['entrega_hora']?></td>                            
+                            <td class="text-center" ><?php echo $reservas['entrega_lugar']?></td>
                             <td class="text-left" ><?php echo $reservas['nombre']?></td>
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?> <?php echo $reservas['devolucion_hora']?></td>  
+                            <td class="text-center" ><?php echo $reservas['devolucion_lugar']?></td>
+
+                            <td class="text-center" ><?php echo $reservas['dominio']?></td>
                             <td class="text-right" ><?php echo $estados[$reservas['estado']]?></td>
                             <td class="text-center">
 
