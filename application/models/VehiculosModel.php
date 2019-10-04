@@ -203,6 +203,14 @@ class VehiculosModel extends CI_Model {
             $this->dbforge->add_column('vechiculo_ficha_tecnica', $fields); 
         }
 
+        if (!$this->db->field_exists('otro_arreglo_fecha', 'vechiculo_ficha_tecnica')){
+            $fields = array(
+                'otro_arreglo_fecha'        => array('type' => 'DATE','AFTER'=>'otros'),   
+                'otro_arreglo_observacion'  => array('type' => 'TEXT','DEFAULT' =>'','AFTER'=>'otro_arreglo_fecha'),     
+            );
+            $this->dbforge->add_column('vechiculo_ficha_tecnica', $fields); 
+        }
+
         
 
         
@@ -292,6 +300,8 @@ class VehiculosModel extends CI_Model {
             $result['nivel_agua_fecha']='';
             $result['nivel_agua_observacion']='';
             $result['otros']=array();
+            $result['otro_arreglo_fecha']='';
+            $result['otro_arreglo_observacion']='';
             return $result;
         }
       // var_dump($result);
@@ -333,7 +343,9 @@ class VehiculosModel extends CI_Model {
         if(isset($data['otro_item'])){
             $params['otros']=json_encode($data['otro_item'],    true);
         }
-        
+
+        $params['otro_arreglo_fecha']=$data['otro_arreglo_fecha'];
+        $params['otro_arreglo_observacion']=$data['otro_arreglo_observacion'];        
        
       
         if(isset($data['id']) && $data['id']!=''){

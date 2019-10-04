@@ -47,7 +47,15 @@
                         <input type="hidden" name="vehiculo_id" value="<?php echo $vehiculo_id?>">                
                         <input type="hidden" name="id" value="<?php echo (isset($ficha['id']))?$ficha['id']:''?>">                
                     <fieldset>
-                        <legend>Datos Vehículo</legend>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                            <legend>Datos Vehículo</legend>
+                            </div>
+                            <div class="col-6 pt-2">
+                            <a href="#" class="btn btn-link">Ver Historial Ficha</a>
+                            </div>
+                        </div>
                         <div class="form-group row">
                         <label for="dominio" class="col-sm-2 col-form-label">Dominio</label>
                         <div class="col-sm-6">
@@ -234,6 +242,28 @@
                             </div>
                         </div>
                     </fieldset>
+
+                    <fieldset>
+                        <legend>Otros Arreglos</legend> 
+
+                        <div class="form-group row">
+                            <label for="otro_arreglo_fecha" class="col-sm-2 col-form-label">Fecha</label>
+                            <div class="col-sm-3">
+                                <input type="date" class="form-control text-right" id="otro_arreglo_fecha" name="otro_arreglo_fecha" value="<?php echo set_value('otro_arreglo_fecha',$ficha['otro_arreglo_fecha']); ?>" placeholder="">
+                                <label id="otro_arreglo_fecha-error" class="error" for="otro_arreglo_fecha"><?php echo form_error('otro_arreglo_fecha'); ?></label>
+                            </div>
+                        </div>                        
+
+                        <div class="form-group row">
+                            <label for="otro_arreglo_observacion" class="col-sm-2 col-form-label">Observacíon</label>
+                            <div class="col-sm-6">
+                                <textarea name="otro_arreglo_observacion" id="otro_arreglo_observacion" class="form-control"><?php echo set_value('otro_arreglo_observacion',$ficha['otro_arreglo_observacion']); ?></textarea>
+                                <label id="otro_arreglo_observacion-error" class="error" for="otro_arreglo_observacion"><?php echo form_error('otro_arreglo_observacion'); ?></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                     <!--
                     <fieldset>
                         <legend>Otros Arreglos</legend>
                         <div class="form-group row">
@@ -248,7 +278,7 @@
                         </div>    
                         
                     </fieldset>
-
+                   
                     <div id="otros_arreglos_inputs">
                         <?php foreach($ficha['otros'] as $key=>$input):?>
                             <fieldset>
@@ -268,7 +298,7 @@
                             </fieldset>
                         <?php endforeach; ?>
                     </div>   
-                    
+                    -->
                     <div class="form-group row">
                         <div class="col-sm-2 float-left">
                             <a href="<?php echo base_url('/vehiculos')?>" class="btn btn-secondary btn-block">Volver</a>
