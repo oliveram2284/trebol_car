@@ -40,13 +40,15 @@
             </thead>
             <tbody>
                 <?php foreach ($historial as $key => $value):?>
+                    <?php if($value['ficha']['cambio_aceite_fecha']!='' && $value['ficha']['cambio_aceite_fecha']!='0000-00-00'):?>
                     <tr>               
                         
                         <td><?php echo date('d-m-Y ',strtotime($value['ficha']['cambio_aceite_fecha'])) ?></td>
                         <td><?php echo $value['ficha']['cambio_aceite_km']?></td>
-                        <td><?php echo implode(', ',json_decode($value['ficha']['cambio_aceite_filtro']))?></td>
+                        <td><?php echo ($value['ficha']['cambio_aceite_filtro']!='')? implode(', ',json_decode($value['ficha']['cambio_aceite_filtro'])):''?></td>
                         <td><?php echo $value['ficha']['cambio_aceite_observacion']?></td>
                     </tr>
+                    <?php endif;?>
                 <?php endforeach;?>
             </tbody>
         </table>
@@ -64,12 +66,15 @@
             </thead>
             <tbody>
                 <?php foreach ($historial as $key => $value):?>
-                    <tr>               
-                        <td><?php echo date('d-m-Y ',strtotime($value['ficha']['aline_balance_fecha'])) ?></td>
-                        <td><?php echo $value['ficha']['aline_balance_km']?></td>
-                        <td><?php echo implode(', ',json_decode($value['ficha']['aline_balance_cambio'],true))?></td>
-                        <td><?php echo $value['ficha']['aline_balance_observacion']?></td>
-                    </tr>
+                    <?php if($value['ficha']['aline_balance_fecha']!='' && $value['ficha']['aline_balance_fecha']!='0000-00-00'):?>
+                        <tr>               
+                            <td><?php echo date('d-m-Y ',strtotime($value['ficha']['aline_balance_fecha'])) ?></td>
+                            <td><?php echo $value['ficha']['aline_balance_km']?></td>
+                            <td><?php echo  ($value['ficha']['aline_balance_cambio']!='')?implode(', ',json_decode($value['ficha']['aline_balance_cambio'],true)):''?></td>
+                            <td><?php echo $value['ficha']['aline_balance_observacion']?></td>
+                        </tr>
+                    <?php endif;?>
+                   
                 <?php endforeach;?>
             </tbody>
         </table>

@@ -138,7 +138,7 @@
                     <div class="form-group row">
                         <label for="adelanto" class="col-sm-2 col-form-label">Seña</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="adelanto" name="adelanto" value="<?php echo set_value('adelanto',$reserva['adelanto']); ?>" placeholder="adelanto">
+                            <input type="text" class="form-control" id="adelanto" name="adelanto" value="<?php echo set_value('adelanto',($reserva['adelanto']!='')?number_format($reserva['adelanto'],0,',','.'):''); ?>" placeholder="adelanto">
                             <label id="adelanto-error" class="error" for="adelanto"><?php echo form_error('adelanto'); ?></label>
 
                       </div>

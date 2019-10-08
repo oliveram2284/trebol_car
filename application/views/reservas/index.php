@@ -1,4 +1,5 @@
 <?php
+/*
 $estados=array(
     0=>'<span class="badge badge-warning badge-text"><i class="icon-Car"></i> SIN AUTO</span>',
     1=>'<span class="badge badge-info badge-text"><i class="far fa-clock"></i> CONFIRMADA</span> ',
@@ -7,6 +8,10 @@ $estados=array(
     4=>'<span class="badge badge-pink badge-text"><i class="fa fa-stop"></i> FINALIZADA</span>',
     5=>'<span class="badge badge-danger badge-text"><i class="fa fa-times mr-1"></i> ANULADA</span>'
     
+);*/
+$estados=array(
+    0=>'<span class="badge badge-info badge-text"><i class="far fa-clock"></i> CONFIRMADA</span> ',
+    1=>'<span class="badge badge-success badge-text"><i class="far fa-check"></i>EN CURSO</span>',
 );
 ?>
 <div class="page-subheader mb-30">
@@ -72,14 +77,14 @@ $estados=array(
                         <tr>
                                                       
                             <td class="text-center" ><?php echo $reservas['categoria']?></td>   
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?><?php echo $reservas['entrega_hora']?></td>                            
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?>   <?php echo $reservas['entrega_hora']?></td>                            
                             <td class="text-center" ><?php echo $reservas['entrega_lugar']?></td>
                             <td class="text-left" ><?php echo $reservas['nombre']?></td>
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?> <?php echo $reservas['devolucion_hora']?></td>  
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?>   <?php echo $reservas['devolucion_hora']?></td>  
                             <td class="text-center" ><?php echo $reservas['devolucion_lugar']?></td>
 
                             <td class="text-center" ><?php echo $reservas['dominio']?></td>
-                            <td class="text-right" ><?php echo $estados[$reservas['estado']]?></td>
+                            <td class="text-right" ><?php  echo $estados[$reservas['curso']];?></td>
                             <td class="text-center">
 
                                 <?php /*switch($reservas['estado']): 

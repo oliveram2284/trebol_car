@@ -322,7 +322,7 @@
 
 <input type="hidden" value="<?php echo base_url();?>" id="url">
 <div class="modal" id="historial_modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl" role="document" style="max-widht=1024px">
+  <div class="modal-dialog modal-xl" role="document" style="max-width: 1024px !important;">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Historial Ficha Técnica</h5>

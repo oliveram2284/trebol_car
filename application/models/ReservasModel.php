@@ -152,6 +152,8 @@ class ReservasModel extends CI_Model {
 
     public function get_list(){
         $this->db->select('reservas.*,categorias.nombre as categoria, vehiculos.dominio as "vehiculos_dominio",vehiculos.marca,vehiculos.modelo');
+        $this->db->select("IF (  ( CONCAT(`reservas`.`entrega_fecha`,' ', `reservas`.`entrega_hora` ) <= NOW() )  ,1,0) AS curso");
+        $this->db->select("IF (  ( CONCAT(`reservas`.`devolucion_fecha`,' ', `reservas`.`devolucion_hora` ) < NOW() )  ,1,0) AS terminado");
         $this->db->from('reservas');
         $this->db->join('categorias', 'categorias.id = reservas.categoria_id');
         $this->db->join('vehiculos' , 'vehiculos.id  = reservas.vehiculo_id' , 'left');
