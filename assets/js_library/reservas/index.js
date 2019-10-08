@@ -1,4 +1,30 @@
 $(document).ready(function() {
+
+    $('#data-table').DataTable({
+        responsive: true,
+        //'processing': true,
+        //'serverSide': true,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "language": {
+            "lengthMenu": "Ver _MENU_ filas por página",
+            "zeroRecords": "No hay registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrando de un total de _MAX_ registros)",
+            "sSearch": "Buscar:  ",
+            "oPaginate": {
+                "sNext": "Sig.",
+                "sPrevious": "Ant."
+            }
+        }
+    });
+
+
     console.log("LOAD RESERVA INDEX JS");
     var url = $("#url").val();
     $(".confirm_bt").on('click',function(){

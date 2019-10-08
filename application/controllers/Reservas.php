@@ -89,33 +89,31 @@ class Reservas extends CI_Controller {
         array(
           'required'      => 'Debe ingresar %s.'
         )
-      );
-      /*
-      $this->form_validation->set_rules('observacion', 'Seña', 'required',
-        array(
-          'required'      => 'Debe ingresar %s.'
-        )
-      );*/
-
-      
+      );      
 
       if ($this->form_validation->run()){
-        $result= $this->Reservas->insert($this->input->post());
-        $this->session->set_flashdata('msg', 'Nueva Rerseva fue Creada');
-        redirect('reservas');
 
-      }else{
-        $permisos=$this->auth->permisos();	
-        $this->load->view('layout/header',array('permisos'=>$permisos));
-        $data=array();
-        $data['reserva']=null;
-        $data['categorias'] = $this->Categorias->get_list();
-        $data['action'] = "reservas/add";
-        $this->load->view('reservas/form',$data);
-        $data['scripts'][]='js_library/reservas/form.js';
-        $this->load->view('layout/footer',$data);
+        if($this->Reservas->hayDisponibilidad($this->input->post())){
+          
+          $result= $this->Reservas->insert($this->input->post());
+          $this->session->set_flashdata('msg', 'Nueva Rerseva fue Creada');
+          redirect('reservas');
+
+        }else{
+          $this->session->set_flashdata('msg', 'La categoria Seleccionada no tiene Vehiculos Disponible para esas Fechas');
+        }      
+
       }
-        
+
+      $permisos=$this->auth->permisos();	
+      $this->load->view('layout/header',array('permisos'=>$permisos));
+      $data=array();
+      $data['reserva']=null;
+      $data['categorias'] = $this->Categorias->get_list();
+      $data['action'] = "reservas/add";
+      $this->load->view('reservas/form',$data);
+      $data['scripts'][]='js_library/reservas/form.js';
+      $this->load->view('layout/footer',$data);
     }
 
   public function edit($id){

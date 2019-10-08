@@ -41,6 +41,12 @@
                 </div>
             </div>
             <div class="portlet-body">
+                <?php if($this->session->flashdata('msg')): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $this->session->flashdata('msg'); ?>
+                    </div>
+                
+                <?php endif;?>
                 <?php echo form_open($action,array('method'=>'post')); ?>
                     <div class="form-group row">
                         <label for="categoria_id" class="col-sm-2 col-form-label">Categoría</label>

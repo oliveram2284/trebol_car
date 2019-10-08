@@ -228,6 +228,23 @@ class ReservasModel extends CI_Model {
         $this->db->insert('reservas_log',$reserva_log);        
     }
 
+    public function hayDisponibilidad($data){
+        $date_to=$data['entrega_fecha']." ".$data['entrega_hora'];
+        $date_to=date('Y-m-d H:i:s',strtotime($date_to));
+
+        $sql="SELECT IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=r.categoria_id), 1,0) AS disponible";
+        $sql.=" FROM reservas AS r WHERE r.categoria_id=".$data['categoria_id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
+
+        $query = $this->db->query($sql);
+        
+        if($query->num_rows()!=0){
+            $row=$query->row_array();
+           
+            return ($row['disponible']==1);
+        }
+       
+        return false;
+    }
     public function setVehiculo($id,$vehiculo_id=0){
 
         $last_reserva=$this->getById($id);

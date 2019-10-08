@@ -14,6 +14,12 @@ $estados=array(
     1=>'<span class="badge badge-success badge-text"><i class="far fa-check"></i>EN CURSO</span>',
 );
 ?>
+<style>
+    .table td, .table th{
+        padding:.50rem;
+        font-size:13px;
+    }
+</style>
 <div class="page-subheader mb-30">
     <div class="container-fluid">
         <div class="row align-items-center">
