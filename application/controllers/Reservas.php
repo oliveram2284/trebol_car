@@ -260,14 +260,15 @@ class Reservas extends CI_Controller {
     $data=array();
     $data['result']=$this->Reservas->consultar($date, $categoria_id);
 
-    //var_dump($result);
-    //return false;
+
+    $data['proximo_disponible'] = $this->Reservas->getProximaDisponibilidad($date);
+    
+   
     $this->load->view('reservas/consulta',$data);
   }
 
 
   public function calendario(){
-
     $eventos=$this->Reservas->calendario($this->input->post());
     echo json_encode(array('status'=>'true','result'=>$eventos));
   }

@@ -378,11 +378,34 @@ class ReservasModel extends CI_Model {
         }
     }
 
+    public function getProximaDisponibilidad($date){
 
+        $date_to=date('Y-m-d H:i:s');
+        $date_to=date('Y-m-d H:i:s',strtotime($date));
+
+        $this->db->select("id,nombre");
+        $this->db->order_by('nombre');
+        $query = $this->db->get('categorias');
+        $disponibilidad=array();
+       
+        foreach ($query->result_array() as $key => $category) {    
+            $temp=$category;   
+            $sql="SELECT CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) as fecha FROM reservas AS r WHERE categoria_id=".$category['id']." and CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ORDER BY r.devolucion_fecha DESC LIMIT 1;";
+            $query=$this->db->query($sql);
+                        
+            if($query->num_rows()!=0){
+                $row=$query->row_array();                
+                $temp=$category;
+                $temp= array_merge($temp,$row);
+                $disponibilidad[]=$temp;
+            }
+        
+        }
+
+        return $disponibilidad;
+    }
 
     public function calendario($params){
-        /*var_dump($params);
-        die("fin");*/
         $start=$params['start'];
         $end=$params['end'];
         $sql=" SELECT *                   

@@ -123,7 +123,7 @@
          
              -->
             <div class="row ">
-                <div class="col-lg-6">
+                <div class="col-lg-4 col-sm-12 col-xs-12">
                     <div class="portlet-box portlet-gutter  mb-40 p-3   rounded">
                         <div class="portlet-header flex-row flex full-height d-flex align-items-center b-b">
                             <div class="flex d-flex flex-column">
@@ -160,7 +160,7 @@
                     </div><!--portlet-->
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-8 col-sm-12 col-xs-12">
                     <div class="portlet-box portlet-gutter  mb-30 p-3   rounded">
                         <div class="portlet-header flex-row flex full-height d-flex align-items-center b-b">
                             <div class="flex d-flex flex-column">
