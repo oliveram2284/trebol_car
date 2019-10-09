@@ -320,56 +320,58 @@ class ReservasModel extends CI_Model {
 
         
         if($categoria_id==''){
-            $this->db->select("id,nombre, (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=categorias.id) AS vehiculos");
+
+            $this->db->select("id,nombre");
+            $this->db->order_by('nombre');
             $query = $this->db->get('categorias');
-
-            
             $reservas=array();
-            foreach ($query->result_array() as $key => $category) {
-               
-                $temp=$category;
+           
+            foreach ($query->result_array() as $key => $category) {                
 
-                $where_categoria=" AND reservas.categoria_id=".$category['id']." ";
-                $sql=" SELECT
-                       COUNT(*) AS reservas                   
-                       FROM reservas 
-                       where CONCAT(entrega_fecha,' ',entrega_hora)>='".$date."' $where_categoria
-                       GROUP BY categoria_id 
-                       order by categoria_id;";
-                $result= $this->db->query($sql);
-                $result= $result->row_array();
+                $date_to=date('Y-m-d H:i:s');
+                $date_to=date('Y-m-d H:i:s',strtotime($date));
+
+                $sql="SELECT COUNT(*) as reservas, (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id'].") as vehiculos, IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id']."), 1,0) AS disponible";
+                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
                
-                $result= (!is_null($result))?(int)$result['reservas']:0;
-                $temp['reservas']=$result;
-                $reservas[]=$temp;
+                $query = $this->db->query($sql);
+                
+                if($query->num_rows()!=0){
+                    $row=$query->row_array();
+                    $temp=$category;
+                    $temp= array_merge($temp,$row);
+                    $reservas[]=$temp;
+                }
             }
-
             return $reservas;
         }else{
-
-            $this->db->select("id,nombre, (SELECT count(id) FROM vehiculos WHERE vehiculos.categoria_id=categorias.id) AS vehiculos");
+           
+            $this->db->select("id,nombre");
             $this->db->where('id',$categoria_id);
+            
             $query = $this->db->get('categorias');
 
             
             $reservas=array();
             foreach ($query->result_array() as $key => $category) {
                
-                $temp=$category;
+                $temp=$category;                
 
-                $where_categoria=" AND reservas.categoria_id=".$category['id']." ";
-                $sql=" SELECT
-                       COUNT(*) AS reservas                   
-                       FROM reservas 
-                       where CONCAT(entrega_fecha,' ',entrega_hora)>='".$date."' $where_categoria
-                       GROUP BY categoria_id 
-                       order by categoria_id;";
-                $result= $this->db->query($sql);
-                $result= $result->row_array();
-               
-                $result= (!is_null($result))?(int)$result['reservas']:0;
-                $temp['reservas']=$result;
-                $reservas[]=$temp;
+                $date_to=date('Y-m-d H:i:s');
+                $date_to=date('Y-m-d H:i:s',strtotime($date));
+
+                $sql="SELECT COUNT(*) as reservas, (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id'].") as vehiculos, IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id']."), 1,0) AS disponible";
+                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
+                
+                $query = $this->db->query($sql);
+                
+                if($query->num_rows()!=0){
+                    $row=$query->row_array();
+                    
+                    $temp=$category;
+                    $temp= array_merge($temp,$row);
+                    $reservas[]=$temp;
+                }
             }
 
             return $reservas;
