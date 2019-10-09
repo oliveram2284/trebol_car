@@ -21,7 +21,9 @@
             <tr class="<?php echo $class?>">
                 <td class="text-center" ><?php echo $row['nombre']?></td>
                 <td class="text-center"><?php echo $row['reservas']?></td>
-                <td class="text-center"><?php echo ((int)$row['vehiculos']-(int)$row['reservas'])?></td>
+                <td class="text-center"><?php 
+                    $total=((int)$row['vehiculos']-(int)$row['reservas']);
+                echo ($total>0)?$total:0; ?></td>
             </tr>
         <?php endforeach;?>
     </tbody>
