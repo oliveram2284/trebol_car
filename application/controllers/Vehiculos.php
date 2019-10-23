@@ -174,9 +174,80 @@ class Vehiculos extends CI_Controller {
 
     public function get_ficha_historial($ficha_id){
         $historial = $this->Vehiculos->getFichaHistorial($ficha_id);
-      
-        $output= $this->load->view('vehiculos/ficha_historial',array('historial'=>$historial));
+        $result=array();
+        $log_aceite=array();
+        $log_alineacion=array();
+        $log_agua=array();
+        $log_otros=array();
+        foreach ($historial as $key => $value) {           
+           //var_dump($value);          
 
+            if(isset($value['ficha']['cambio_aceite_fecha'])){
+                $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['cambio_aceite_fecha'],$log_aceite);
+                if($existe_item==false){
+                    $log_aceite[]=array(
+                        'fecha'=>$value['ficha']['cambio_aceite_fecha'],
+                        'km'=>$value['ficha']['cambio_aceite_km'],
+                        'recambio'=>implode(',',$value['ficha']['cambio_aceite_filtro']),
+                        'observacion'=>$value['ficha']['cambio_aceite_observacion'],
+                    );      
+                }
+                       
+            }
+
+            if(isset($value['ficha']['aline_balance_fecha'])){
+                $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['aline_balance_fecha'],$log_alineacion);
+                if($existe_item==false){
+                    $log_alineacion[]=array(
+                        'fecha'=>$value['ficha']['aline_balance_fecha'],
+                        'km'=>$value['ficha']['aline_balance_km'],
+                        'recambio'=>implode(',',$value['ficha']['aline_balance_cambio']),
+                        'observacion'=>$value['ficha']['aline_balance_observacion'],
+                    );      
+                }
+                       
+            }
+
+            if(isset($value['ficha']['nivel_agua_fecha'])){
+                $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['nivel_agua_fecha'],$log_agua);
+                if($existe_item==false && $value['ficha']['nivel_agua_fecha']!='' ){
+                    $log_agua[]=array(
+                        'fecha'=>$value['ficha']['nivel_agua_fecha'],
+                        'observacion'=>$value['ficha']['nivel_agua_observacion'],
+                    );      
+                }                       
+            }
+            if(isset($value['ficha']['otro_arreglo_fecha'])){
+                $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['otro_arreglo_fecha'],$log_otros);
+                if($existe_item==false && $value['ficha']['otro_arreglo_fecha']!=''){
+                    $log_otros[]=array(
+                        'fecha'=>$value['ficha']['nivel_agua_fecha'],
+                        'observacion'=>$value['ficha']['nivel_agua_observacion'],
+                    );      
+                }                       
+            }
+           
+
+        }
+        $historial_data=array(
+            'log_aceite'=>$log_aceite,
+            'log_alineacion'=>$log_alineacion,
+            'log_agua'=>$log_agua,
+            'log_otros'=>$log_otros,
+        );
+        //var_dump($historial_data);
+        $output= $this->load->view('vehiculos/ficha_historial',array('historial'=>$historial_data));
         echo json_encode(array('status'=>'true','html'=>$output));
     }
+
+
+    function searchArrayKeyVal($sKey, $id, $array) {
+        foreach ($array as $key => $val) {
+            if ($val[$sKey] == $id) {
+               
+                return true;
+            }
+        }
+        return false;
+     }
 }

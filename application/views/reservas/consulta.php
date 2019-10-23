@@ -45,4 +45,4 @@
         <?php endforeach;?>
     </tbody>
 </table>
-<a href="<?php echo base_url('/reservas');?>" class="btn  btn-square btn-primary mt-20 btn-block mb-2">Crear Reserva</a>
+<a href="<?php echo base_url('/reservas/add');?>" class="btn  btn-square btn-primary mt-20 btn-block mb-2">Crear Reserva</a>
