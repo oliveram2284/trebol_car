@@ -133,8 +133,12 @@
                         <div class="portlet-body" style="min-height: 250px;">  
                             <div class="filter">
                                 <div class="form-group">
-                                    <label>Fecha</label>
-                                    <input type="text" class="form-control mb-10" id="filter_date" name="fecha">
+                                    <label>Fecha Desde</label>
+                                    <input type="text" class="form-control mb-10" id="filter_date_from" name="fecha_desde">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha Hasta</label>
+                                    <input type="text" class="form-control mb-10" id="filter_date_to" name="fecha_hasta">
                                 </div>
 
                                 <div class="form-group">

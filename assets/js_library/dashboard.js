@@ -2,11 +2,25 @@
 $(function(){
     var url = $("#url").val();
     console.log("====> LOAD DASHBOARD LIB");    
-    $("#filter_date").datetimepicker({       
+    $("#filter_date_from").datetimepicker({
+              
+        format:'d/m/Y H:i',
+        locale: 'es',
+        useCurrent:true,
+        onShow:function( ct ){
+        this.setOptions({
+            minDate:0,
+            maxDate:$('#filter_date_to').val()?$('#filter_date_to').val():false
+         });
+        },
+    });
+
+    $("#filter_date_to").datetimepicker({  
+        locale: 'es',     
         format:'d/m/Y H:i',
         onShow:function( ct ){
          this.setOptions({
-          maxDate:$('#date_timepicker_end').val()?$('#date_timepicker_end').val():false
+          minDate:$('#filter_date_from').val()?$('#filter_date_from').val():false
          });
         },
     });

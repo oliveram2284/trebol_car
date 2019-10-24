@@ -28,7 +28,7 @@
         
         
         
-        <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.full.min.js"></script>
+        <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/dt-picker/jquery.datetimepicker.full.js"></script>
         
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/moment.js"></script>
         <script type="text/javascript" src="<?php  echo base_url();?>assets/lib/fullcalendar/fullcalendar.min.js"></script>
