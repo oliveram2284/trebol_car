@@ -180,8 +180,7 @@ class Vehiculos extends CI_Controller {
         $log_agua=array();
         $log_otros=array();
         foreach ($historial as $key => $value) {           
-           //var_dump($value);          
-
+           
             if(isset($value['ficha']['cambio_aceite_fecha'])){
                 $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['cambio_aceite_fecha'],$log_aceite);
                 if($existe_item==false){
@@ -197,7 +196,8 @@ class Vehiculos extends CI_Controller {
 
             if(isset($value['ficha']['aline_balance_fecha'])){
                 $existe_item=$this->searchArrayKeyVal('fecha',$value['ficha']['aline_balance_fecha'],$log_alineacion);
-                if($existe_item==false){
+                
+                if($existe_item==false && $value['ficha']['aline_balance_fecha']!=''  ){
                     $log_alineacion[]=array(
                         'fecha'=>$value['ficha']['aline_balance_fecha'],
                         'km'=>$value['ficha']['aline_balance_km'],

@@ -231,19 +231,22 @@ class ReservasModel extends CI_Model {
     public function hayDisponibilidad($data){
         $date_to=$data['entrega_fecha']." ".$data['entrega_hora'];
         $date_to=date('Y-m-d H:i:s',strtotime($date_to));
-
-        $sql="SELECT IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=r.categoria_id), 1,0) AS disponible";
-        $sql.=" FROM reservas AS r WHERE r.categoria_id=".$data['categoria_id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
-
-        $query = $this->db->query($sql);
+        $sql= "SELECT COUNT(*) as vehiculos FROM vehiculos AS v WHERE categoria_id=".$data['categoria_id'].";";
+        $query = $this->db->query($sql);        
+        $row=$query->row_array();
         
+        $sql="SELECT IF( COUNT(*)  < ".$row['vehiculos'].", 1,0) AS disponible";
+        $sql.=" FROM reservas AS r WHERE r.categoria_id=".$data['categoria_id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
+        
+        $query = $this->db->query($sql);
+        //return true;
         if($query->num_rows()!=0){
             $row=$query->row_array();
            
             return ($row['disponible']==1);
         }
        
-        return false;
+        return true;
     }
     public function setVehiculo($id,$vehiculo_id=0){
 
@@ -316,7 +319,7 @@ class ReservasModel extends CI_Model {
     }
 
 
-    public function consultar($date,$categoria_id=null){
+    public function consultar($date_from,$date_to,$categoria_id=null){
 
         
         if($categoria_id==''){
@@ -328,15 +331,21 @@ class ReservasModel extends CI_Model {
            
             foreach ($query->result_array() as $key => $category) {                
 
-                $date_to=date('Y-m-d H:i:s');
-                $date_to=date('Y-m-d H:i:s',strtotime($date));
+                $date_from=date('Y-m-d H:i:s',strtotime($date_from));
+                $date_to=date('Y-m-d H:i:s',strtotime($date_to));
 
                 $sql="SELECT COUNT(*) as reservas, (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id'].") as vehiculos, IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id']."), 1,0) AS disponible";
-                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
-               
+                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."   
+                AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_from."'
+                AND  CONCAT(`r`.`entrega_fecha`,' ', `r`.`entrega_hora` ) < '".$date_to."';";
+                
                 $query = $this->db->query($sql);
                 
+                
+                
+
                 if($query->num_rows()!=0){
+                    
                     $row=$query->row_array();
                     $temp=$category;
                     $temp= array_merge($temp,$row);
@@ -358,10 +367,13 @@ class ReservasModel extends CI_Model {
                 $temp=$category;                
 
                 $date_to=date('Y-m-d H:i:s');
-                $date_to=date('Y-m-d H:i:s',strtotime($date));
+                $date_to=date('Y-m-d H:i:s',strtotime($date_to));
 
                 $sql="SELECT COUNT(*) as reservas, (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id'].") as vehiculos, IF( COUNT(*)  < (SELECT COUNT(*) FROM vehiculos AS v WHERE categoria_id=".$category['id']."), 1,0) AS disponible";
-                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."   AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."' ;";
+                $sql.=" FROM reservas AS r WHERE r.categoria_id=".$category['id']."  
+                 AND CONCAT(`r`.`devolucion_fecha`,' ', `r`.`devolucion_hora` ) > '".$date_to."'
+                 
+                AND  CONCAT(`r`.`entrega_fecha`,' ', `r`.`entrega_hora` ) < '".$date_to."';";
                 
                 $query = $this->db->query($sql);
                 

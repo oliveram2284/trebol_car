@@ -20,24 +20,31 @@ $(function(){
         format:'d/m/Y H:i',
         onShow:function( ct ){
          this.setOptions({
-          minDate:$('#filter_date_from').val()?$('#filter_date_from').val():false
+            minDate:$('#filter_date_from').val()?$('#filter_date_from').val():false
          });
         },
     });
 
 
     $("#filter_bt").on('click',function(){
-        var date_filter= $("#filter_date").val();
+        var fecha_from= $("#filter_date_from").val();
+        var fecha_to= $("#filter_date_to").val();
         var categoria_id= $("#filter_categoria").val();
-        console.log("===> date_filter: %o",date_filter);
+
+        console.log("===> fecha_from: %o",fecha_from);
+        console.log("===> fecha_to  : %o"  ,fecha_to);
         console.log("===> categoria_id: %o",categoria_id);
-        $.post(url + 'reservas/consulta/',{fecha:date_filter,categoria_id:categoria_id},function(result){
+        $.post(url + 'reservas/consulta/',{fecha_from:fecha_from,fecha_to:fecha_to,categoria_id:categoria_id},function(result){
             console.log("===> result: %o",result);
             $(".filter_result").html(result);
         });        
 
     });
 
+    function getColor(id){
+        var colors=['#26A69A','#FFB74D','#FF7043','#0D47A1','#64B5F6'];
+        return colors[id];
+    }
 
     $('#calendar').fullCalendar({
         locale: 'es',
@@ -70,19 +77,22 @@ $(function(){
                 },
                 success: function(doc) {
 
-                     console.log("===> Eventos: %o",doc)
+                    console.log("===> Eventos: %o",doc)
                     var events = [];
                     if(!!doc.result){
                         console.log("===> Eventos: %o",doc.result);
+                        var colors=['','','','','','#26A69A','#FFB74D','#FF7043','#0D47A1','#64B5F6'];
                         $.map( doc.result, function( r ) {
-                     console.log("===> Evento: %o",r)
-
+                            console.log("===> Evento: %o",r)
+                            console.log("===> Evento: %o",r.categoria_id)
+                            console.log("===> Color: %o",colors[parseInt(r.categoria_id)])
+                            var color=colors[parseInt(r.categoria_id)];
                             events.push({
                                 id: r.id,
                                 title: r.nombre,
                                 start: r.entrega_fecha,
                                 end: r.devolucion_fecha,
-                                color  : 'rgb(134, 212, 245)'
+                                color  : color
                             });
                         });
                     }

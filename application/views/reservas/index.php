@@ -83,10 +83,10 @@ $estados=array(
                         <tr>
                                                       
                             <td class="text-center" ><?php echo $reservas['categoria']?></td>   
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?>   <?php echo $reservas['entrega_hora']?></td>                            
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['entrega_fecha']))?>   <?php echo date('H:i',strtotime($reservas['entrega_hora']))?></td>                            
                             <td class="text-center" ><?php echo $reservas['entrega_lugar']?></td>
                             <td class="text-left" ><?php echo $reservas['nombre']?></td>
-                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?>   <?php echo $reservas['devolucion_hora']?></td>  
+                            <td class="text-center" ><?php echo date('d/m/Y',strtotime($reservas['devolucion_fecha']))?>   <?php echo date('H:i',strtotime($reservas['devolucion_hora']))?></td>  
                             <td class="text-center" ><?php echo $reservas['devolucion_lugar']?></td>
 
                             <td class="text-center" ><?php echo $reservas['dominio']?></td>

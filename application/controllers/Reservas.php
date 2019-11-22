@@ -95,6 +95,7 @@ class Reservas extends CI_Controller {
 
         if($this->Reservas->hayDisponibilidad($this->input->post())){
           
+          
           $result= $this->Reservas->insert($this->input->post());
           $this->session->set_flashdata('msg', 'Nueva Rerseva fue Creada');
           redirect('reservas');
@@ -188,10 +189,14 @@ class Reservas extends CI_Controller {
     
 
     if ($this->form_validation->run()){
-
-      $result= $this->Reservas->update($id,$this->input->post());
-      $this->session->set_flashdata('msg', 'La Rerseva '.$id.' fue Modificada');
-      redirect('reservas');
+      if($this->Reservas->hayDisponibilidad($this->input->post())){
+        $result= $this->Reservas->update($id,$this->input->post());
+        $this->session->set_flashdata('msg', 'La Rerseva '.$id.' fue Modificada');
+        redirect('reservas');
+      }else{
+        $this->session->set_flashdata('msg', 'La categoria Seleccionada no tiene Vehiculos Disponible para esas Fechas');
+      }
+     
 
     }else{
 
@@ -253,15 +258,19 @@ class Reservas extends CI_Controller {
 
   public function consulta(){
     
-    $date=str_replace('/','-',$this->input->post('fecha'));
-    $date=date('Y-m-d H:i',strtotime($date));
+    $fecha_from=str_replace('/','-',$this->input->post('fecha_from'));
+    $fecha_from=date('Y-m-d H:i',strtotime($fecha_from));
+
+    $fecha_to=str_replace('/','-',$this->input->post('fecha_to'));
+    $fecha_to=date('Y-m-d H:i',strtotime($fecha_to));
+
     $categoria_id = (!is_null($this->input->post('categoria_id')))?$this->input->post('categoria_id'):null; //( isset()) ? $this->input->post('category_id') : null;
     
     $data=array();
-    $data['result']=$this->Reservas->consultar($date, $categoria_id);
+    $data['result']=$this->Reservas->consultar($fecha_from,$fecha_to, $categoria_id);
 
-
-    $data['proximo_disponible'] = $this->Reservas->getProximaDisponibilidad($date);
+    
+    $data['proximo_disponible'] = $this->Reservas->getProximaDisponibilidad($fecha_from);
     
    
     $this->load->view('reservas/consulta',$data);

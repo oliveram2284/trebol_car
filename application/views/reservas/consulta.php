@@ -38,8 +38,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($proximo_disponible as $row):?>            
-            <tr class="<?php echo $class?>">
+        <?php foreach($proximo_disponible as $row):?>       
+          
+            <tr class="">
                 <td class="text-center" ><?php echo $row['nombre']?></td>
                 <td class="text-center"><?php echo date('d-m-Y H:i',strtotime($row['fecha']))?></td>
         <?php endforeach;?>
